@@ -28,9 +28,9 @@ class InputHandler:
 			elif event.type == pygame.MOUSEMOTION:
 				self.mouse_pos = event.pos	
 			elif event.type == pygame.MOUSEBUTTONDOWN:
-				z = 1
+				self._z = 1
 			elif event.type == pygame.MOUSEBUTTONUP:
-				z = 0	
+				self._z = 0	
 	
 # improper use of getter and setter. but it works for now
 	def set_mouse_pos(self):
@@ -38,3 +38,6 @@ class InputHandler:
 
 	def get_mouse_pos(self):
 		return self.mouse_pos
+
+	def get_z(self):
+		return self._z	
