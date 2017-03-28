@@ -18,7 +18,7 @@ class Handler:
 		self._z = z
 
 		for i in self._obj_list:
-			i.update(self.mouse_pos)
+			i.update(self.mouse_pos, self._z)
 
 	def draw(self):
 		for i in self._obj_list:

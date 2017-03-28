@@ -15,8 +15,9 @@ class Pointer:
 		self.mouse_pos = (start_x, start_y)
 		self.screen = screen
 
-	def update(self, mouse_pos):
-		self.mouse_pos = mouse_pos	
+	def update(self, mouse_pos, z):
+		self.mouse_pos = mouse_pos
+		self._z = z	
 
 	def draw(self, mouse_pos):
 
