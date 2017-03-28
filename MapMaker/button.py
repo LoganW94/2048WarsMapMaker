@@ -13,6 +13,8 @@ class Button:
 		self._font = font
 		self.color = color
 
+	def update(self, mouse_pos):
+		self.mouse_pos = mouse_pos	
 
 	#def check_collide(self, mouse_pos):
 			
