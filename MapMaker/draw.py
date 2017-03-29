@@ -32,7 +32,10 @@ class Draw:
 		# Background color
 		self.screen.fill(white)	
 
-		self.handler.draw()
+		#self.handler.draw()
+
+		for i in self.obj_list:
+			i.draw(self.handler.get_mouse_pos())
 
 
 

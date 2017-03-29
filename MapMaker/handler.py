@@ -25,4 +25,7 @@ class Handler:
 			i.draw(self.mouse_pos)
 
 	def get_obj_list(self):
-		return self._obj_list		
+		return self._obj_list	
+
+	def get_mouse_pos(self):
+		return self.mouse_pos
