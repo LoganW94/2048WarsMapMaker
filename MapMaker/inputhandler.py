@@ -1,9 +1,16 @@
 import pygame
 
+# colors
+white = (255,255,255)
+black = (0,0,0)
+red = (255,0,0)
+green = (0,255,0)
+blue = (0,0,255)
+grey = (211,211,211)
 
 class InputHandler:
 
-	def __init__(self, screen, displayWidth, displayHeight):
+	def __init__(self, screen, displayWidth, displayHeight, font):
 		self._z = 0
 
 		self.cursor_x = displayWidth/2
@@ -18,6 +25,10 @@ class InputHandler:
 		pygame.mouse.set_pos(self.mouse_pos)
 		pygame.mouse.set_visible(False)
 
+		self.font = font
+		self.recieve_input = False
+		self.input_text = ''
+
 	def get_input(self):
 		# get user input
 		for event in pygame.event.get():
@@ -31,6 +42,8 @@ class InputHandler:
 				self._z = 1
 			elif event.type == pygame.MOUSEBUTTONUP:
 				self._z = 0	
+			elif event.type == pygame.KEYDOWN and self.recieve_input == True:		
+				self.input_text += event
 	
 # improper use of getter and setter. but it works for now
 	def set_mouse_pos(self):
@@ -40,4 +53,13 @@ class InputHandler:
 		return self.mouse_pos
 
 	def get_z(self):
-		return self._z	
+		return self._z
+
+	def get_text_input(self, input_text):
+		output_text = ''
+		output_text = self.font.render(input_text, True, black)
+		self.screen.blit(output_text, [200,20])
+		print(output_text)
+
+	def arm(self):
+			self.get_text_input(self.input_text)			

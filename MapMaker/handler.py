@@ -1,15 +1,10 @@
 import pygame
-import button
-
-
-
-
 
 class Handler:
 	
-	def __init__(self, button1, pointer):
+	def __init__(self, obj_list):
 		self._temp = 0
-		self._obj_list = [button1, pointer]
+		self._obj_list = obj_list
 
 	def update(self, mouse_pos, menu_state, z):
 

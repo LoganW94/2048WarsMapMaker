@@ -5,6 +5,7 @@ import inputhandler
 import handler
 import button
 import pointer
+import cursor
 
 pygame.init()
 
@@ -20,14 +21,11 @@ grey = (211,211,211)
 icon = 'assets/icon.png'
 tempJson = 'assets/turtle_island.json'
 
-# variables 
+# variables  
 displayWidth = 800
 displayHeight = 600
 FPS = 60
 menu_state = 0
-
-def test():
-	print("this is a test")
 
 font = pygame.font.SysFont(None, 25)
 
@@ -35,14 +33,23 @@ font = pygame.font.SysFont(None, 25)
 screen = pygame.display.set_mode((displayWidth,displayHeight))
 pygame.display.set_caption('MapMaker Alpha')
 
-#init objects
-button_1 = button.Button(screen, 'test button', displayWidth/2, displayHeight/2, 20, 100, font, grey, test)
-pointer = pointer.Pointer(displayWidth/2, displayHeight/2, screen)
+#init methods
+loader = loadmap.LoadMap(tempJson)
+handle_input = inputhandler.InputHandler(screen,displayWidth, displayHeight, font)
 
+#init objects
+loadbutton = button.Button(screen, 'Load', (displayWidth/2-25), (displayHeight/2-10), 20, 50, font, grey, loader.open_file)
+printbutton = button.Button(screen, 'Print', (displayWidth/2-25), (displayHeight/2+20), 20, 50, font, grey, loader.print_file)
+textbox = button.Button(screen, ' ', (displayWidth/2-100), (displayHeight/2+40), 20, 200, font, grey, handle_input.arm)
+
+pointer = pointer.Pointer(displayWidth/2, displayHeight/2, screen)
+cursor = cursor.Cursor(screen)
+
+obj_list = [loadbutton, printbutton, pointer, cursor, textbox]
 #init classes
-handler = handler.Handler(button_1, pointer)
+handler = handler.Handler(obj_list)
 draw_to = draw.Draw(screen, displayWidth, displayHeight, font, handler)
-handle_input = inputhandler.InputHandler(screen,displayWidth,displayHeight)
+
 
 clock = pygame.time.Clock()
 

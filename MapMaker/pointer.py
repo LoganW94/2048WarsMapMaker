@@ -24,4 +24,4 @@ class Pointer:
 		# Mouse pointer
 		self.screen.fill(black, rect = ((self.mouse_pos[0], self.mouse_pos[1]-5), (1, 11)))
 		self.screen.fill(black, rect = ((self.mouse_pos[0]-5, self.mouse_pos[1]), (11, 1)))
-			
+
