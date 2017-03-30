@@ -43,7 +43,7 @@ class InputHandler:
 			elif event.type == pygame.MOUSEBUTTONUP:
 				self._z = 0	
 			elif event.type == pygame.KEYDOWN and self.recieve_input == True:		
-				self.input_text += event
+				self.input_text += event.key
 	
 # improper use of getter and setter. but it works for now
 	def set_mouse_pos(self):
