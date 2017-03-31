@@ -34,6 +34,8 @@ font = pygame.font.SysFont(None, 25)
 # define display
 #screen = pygame.display.set_mode((displayWidth,displayHeight))
 screen = screen.Screen(displayWidth, displayHeight, white)
+
+screen = screen.get_screen()
 #pygame.display.set_caption('MapMaker Alpha')
 
 #init methods

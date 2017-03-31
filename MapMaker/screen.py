@@ -2,8 +2,6 @@ import pygame
 
 class Screen:
 
-	screen = pygame.display.set_mode((500,500)) 
-
 	def __init__(self, width, height, color):
 		self.width = width
 		self.height = height
@@ -11,8 +9,11 @@ class Screen:
 
 		pygame.init()
 
-		screen = pygame.display.set_mode((self.width,self.height))
+		self.screen = pygame.display.set_mode((self.width,self.height))
 
 		pygame.display.set_caption('MapMaker Alpha')
 
-		screen.fill(color)
+		self.screen.fill(color)
+
+	def get_screen(self):
+		return self.screen
