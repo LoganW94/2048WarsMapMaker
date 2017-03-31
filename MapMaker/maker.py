@@ -1,5 +1,7 @@
 import pygame
+import screen
 import loadmap
+import savemap
 import draw
 import inputhandler
 import handler
@@ -30,8 +32,9 @@ menu_state = 0
 font = pygame.font.SysFont(None, 25)
 
 # define display
-screen = pygame.display.set_mode((displayWidth,displayHeight))
-pygame.display.set_caption('MapMaker Alpha')
+#screen = pygame.display.set_mode((displayWidth,displayHeight))
+screen = screen.Screen(displayWidth, displayHeight, white)
+#pygame.display.set_caption('MapMaker Alpha')
 
 #init methods
 loader = loadmap.LoadMap(tempJson)
@@ -40,13 +43,15 @@ handle_input = inputhandler.InputHandler(screen,displayWidth, displayHeight, fon
 #init objects
 loadbutton = button.Button(screen, 'Load', (displayWidth/2-25), (displayHeight/2-10), 20, 50, font, grey, loader.open_file)
 printbutton = button.Button(screen, 'Print', (displayWidth/2-25), (displayHeight/2+20), 20, 50, font, grey, loader.print_file)
-textbox = button.Button(screen, ' ', (displayWidth/2-100), (displayHeight/2+40), 20, 200, font, grey, handle_input.arm)
+textbox = button.Button(screen, ' ', (displayWidth/2-100), (displayHeight/2+50), 20, 200, font, grey, handle_input.arm)
 
 pointer = pointer.Pointer(displayWidth/2, displayHeight/2, screen)
 cursor = cursor.Cursor(screen)
 
 obj_list = [loadbutton, printbutton, pointer, cursor, textbox]
+
 #init classes
+saver = savemap.SaveMap(handle_input)
 handler = handler.Handler(obj_list)
 draw_to = draw.Draw(screen, displayWidth, displayHeight, font, handler)
 

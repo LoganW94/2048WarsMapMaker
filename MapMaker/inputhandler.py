@@ -60,6 +60,10 @@ class InputHandler:
 		output_text = self.font.render(input_text, True, black)
 		self.screen.blit(output_text, [200,20])
 		print(output_text)
+		self.output_text = output_text
 
 	def arm(self):
-			self.get_text_input(self.input_text)			
+			self.get_text_input(self.input_text)
+
+	def get_output_text(self):
+		return self.output_text					
