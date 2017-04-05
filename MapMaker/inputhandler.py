@@ -56,7 +56,6 @@ class InputHandler:
 		return self._z
 
 	def get_text_input(self, input_text):
-		output_text = ''
 		output_text = self.font.render(input_text, True, black)
 		self.screen.blit(output_text, [200,20])
 		print(output_text)
