@@ -59,10 +59,13 @@ class InputHandler:
 		output_text = self.font.render(input_text, True, black)
 		self.screen.blit(output_text, [200,20])
 		print(output_text)
-		self.output_text = output_text
+		return output_text
 
 	def arm(self):
-			self.get_text_input(self.input_text)
+		self.recieve_input == True
 
-	def get_output_text(self):
-		return self.output_text					
+	def dis_arm(self):
+		self.recieve_input == False
+
+	def temp(self):
+		print("I do not think that means what you think it means")

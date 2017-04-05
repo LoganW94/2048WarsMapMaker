@@ -8,6 +8,7 @@ import handler
 import button
 import pointer
 import cursor
+import text_box
 
 pygame.init()
 
@@ -45,12 +46,11 @@ handle_input = inputhandler.InputHandler(screen,displayWidth, displayHeight, fon
 #init objects
 loadbutton = button.Button(screen, 'Load', (displayWidth/2-25), (displayHeight/2-10), 20, 50, font, grey, loader.open_file)
 printbutton = button.Button(screen, 'Print', (displayWidth/2-25), (displayHeight/2+20), 20, 50, font, grey, loader.print_file)
-textbox = button.Button(screen, ' ', (displayWidth/2-100), (displayHeight/2+50), 20, 200, font, grey, handle_input.arm)
+textbox = text_box.TextBox(screen, (displayWidth/2-100), (displayHeight/2+50), 20, 200, font, grey, handle_input)
 
 pointer = pointer.Pointer(displayWidth/2, displayHeight/2, screen)
-cursor = cursor.Cursor(screen)
 
-obj_list = [loadbutton, printbutton, pointer, cursor, textbox]
+obj_list = [loadbutton, printbutton, pointer, textbox]
 
 #init classes
 saver = savemap.SaveMap(handle_input)
