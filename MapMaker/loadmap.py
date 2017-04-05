@@ -1,4 +1,4 @@
-
+import json
 
 class LoadMap:
 	"""Loads map from designated file"""
@@ -12,12 +12,15 @@ class LoadMap:
 			with open(self.url, "r") as f:
 				self.text = f.read()
 				f.close
+				
 		except:
-			print('no such file')		
+			print('no such file')
+
+		self.parsed_file = json.loads(self.text)			
 
 	def print_file(self):
 		try:
-			print(self.text)
+			print(self.parsed_file)
 		except:
 			print('no file loaded')
 		
