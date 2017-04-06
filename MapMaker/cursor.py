@@ -20,7 +20,6 @@ class Cursor:
 
 	def update(self):
 		
-		
 		if self.wait == True:
 			self.timer +=1
 			if self.timer == 10:
@@ -47,7 +46,7 @@ class Cursor:
 		else:
 			self.counter = 0
 
-	def draw(self,mouse_pos):	
+	def draw(self):	
 		x = 20
 		y = 20
 		if self.visible == True:

@@ -2,7 +2,6 @@ import pygame
 import screen
 import loadmap
 import savemap
-import draw
 import inputhandler
 import handler
 import button
@@ -50,12 +49,12 @@ textbox = text_box.TextBox(screen, (displayWidth/2-100), (displayHeight/2+50), 2
 
 pointer = pointer.Pointer(displayWidth/2, displayHeight/2, screen)
 
-obj_list = [loadbutton, printbutton, pointer, textbox]
+obj_list = [loadbutton, printbutton, textbox, pointer]
 
 #init classes
 saver = savemap.SaveMap(handle_input)
 handler = handler.Handler(obj_list)
-draw_to = draw.Draw(screen, displayWidth, displayHeight, font, handler)
+#draw_to = draw.Draw(screen, displayWidth, displayHeight, font, handler)
 
 
 clock = pygame.time.Clock()
@@ -71,7 +70,9 @@ def start():
 		handler.update(mouse_pos, menu_state, z = handle_input.get_z())
 
 		# Draw to screen
-		draw_to.draw(mouse_pos)	
+		#draw_to.draw(mouse_pos)	
+		screen.fill(white)	
+		handler.draw()
 	
 		# Update screen
 		pygame.display.update()
