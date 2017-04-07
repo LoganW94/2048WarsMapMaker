@@ -12,31 +12,25 @@ class Cursor:
 	
 	def __init__(self, screen, x, y):
 		self.screen = screen
+		self._x = x
+		self._y = y
 		self.counter = 0
 		self.is_clicked = False
 		self.wait = False
 		self.timer = 0
 		self.visible = False
 
-	def update(self):
+	def update(self, mouse_pos, z):
 		
+		self.blink()				
+
+	def blink(self):
+
 		if self.wait == True:
 			self.timer +=1
 			if self.timer == 10:
 				self.timer = 0
-				self.wait = False
-
-		if self.is_clicked == True:	
-			self.blink()		
-
-	def clicked(self):
-		if self.visible == False and self.wait == False:
-			self.is_clicked = True
-			self.wait = True
-		elif self.visible == True and self.wait == False:
-			self.clicked = False			
-
-	def blink(self):	
+				self.wait = False	
 		if self.counter <= 5:
 			self.visible = False
 			self.counter +=1
@@ -46,8 +40,13 @@ class Cursor:
 		else:
 			self.counter = 0
 
-	def draw(self):	
-		x = 20
-		y = 20
+	def set_x(self, x):
+		self._x = x
+
+	def set_y(self, y):
+		self._y = y	
+
+	def draw(self, mouse_pos):
+	
 		if self.visible == True:
 			self.screen.fill(black, rect = ((x, y), (1, 11)))

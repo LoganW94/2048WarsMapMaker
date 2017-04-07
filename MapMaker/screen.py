@@ -13,6 +13,10 @@ class Screen:
 
 		pygame.display.set_caption('MapMaker Alpha')
 
+		icon = pygame.image.load('assets/icon.png')
+
+		pygame.display.set_icon(icon)
+
 		self.screen.fill(color)
 
 	def get_screen(self):

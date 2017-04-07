@@ -27,6 +27,26 @@ class Button:
 		self.colide = False
 		self.pressed = False
 
+	def __init__(self, screen, x, y, height, width, color):
+		self.screen = screen
+		self._x = x
+		self._y = y
+		self._height = height
+		self._width = width
+		self.color = color
+		self.color_init = self.color
+		r = self.color[0]
+		g = self.color[1] 
+		b = self.color[2] 
+		r-=20
+		g-=20
+		b-=20
+		self.new_color = (r,g,b)
+		self.clicked_color = (r-10,g-10,b-10)
+		self.colide = False
+		self.pressed = False
+	
+
 	def update(self, mouse_pos, z):
 		self.mouse_pos = mouse_pos
 

@@ -32,24 +32,42 @@ menu_state = 0
 font = pygame.font.SysFont(None, 25)
 
 # define display
-#screen = pygame.display.set_mode((displayWidth,displayHeight))
 screen = screen.Screen(displayWidth, displayHeight, white)
-
 screen = screen.get_screen()
-#pygame.display.set_caption('MapMaker Alpha')
 
 #init methods
 loader = loadmap.LoadMap(tempJson)
-handle_input = inputhandler.InputHandler(screen,displayWidth, displayHeight, font)
+handle_input = inputhandler.InputHandler(screen,
+	displayWidth, 
+	displayHeight, 
+	font)
 
 #init objects
-loadbutton = button.Button(screen, 'Load', (displayWidth/2-25), (displayHeight/2-10), 20, 50, font, grey, loader.open_file)
-printbutton = button.Button(screen, 'Print', (displayWidth/2-25), (displayHeight/2+20), 20, 50, font, grey, loader.print_file)
-textbox = text_box.TextBox(screen, (displayWidth/2-100), (displayHeight/2+50), 20, 200, font, grey, handle_input)
+cursor = cursor.Cursor(screen, 0, 0)
+loadbutton = button.Button(screen, 
+	'Load', 
+	(displayWidth/2-25), 
+	(displayHeight/2-10), 
+	20, 50, 
+	font, grey, 
+	loader.open_file)
+
+printbutton = button.Button(screen, 
+	'Print', 
+	(displayWidth/2-25), 
+	(displayHeight/2+20), 
+	20, 50, 
+	font, grey, 
+	oader.print_file)
+
+textbox = text_box.TextBox(screen, 
+	(displayWidth/2-100), 
+	(displayHeight/2+50), 
+	20, 200, grey, cursor)
 
 pointer = pointer.Pointer(displayWidth/2, displayHeight/2, screen)
 
-obj_list = [loadbutton, printbutton, textbox, pointer]
+obj_list = [loadbutton, printbutton, textbox, pointer, cursor]
 
 #init classes
 saver = savemap.SaveMap(handle_input)
