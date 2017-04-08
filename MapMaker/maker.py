@@ -1,7 +1,6 @@
 import pygame
 import screen
 import loadmap
-import savemap
 import inputhandler
 import handler
 import button
@@ -44,6 +43,7 @@ handle_input = inputhandler.InputHandler(screen,
 
 #init objects
 cursor = cursor.Cursor(screen, 0, 0)
+
 loadbutton = button.Button(screen, 
 	'Load', 
 	(displayWidth/2-25), 
@@ -58,22 +58,27 @@ printbutton = button.Button(screen,
 	(displayHeight/2+20), 
 	20, 50, 
 	font, grey, 
-	oader.print_file)
+	loader.print_file)
 
 textbox = text_box.TextBox(screen, 
 	(displayWidth/2-100), 
 	(displayHeight/2+50), 
-	20, 200, grey, cursor)
+	20, 200, font,
+	grey, cursor, handle_input)
+
+textbox2 = text_box.TextBox(screen, 
+	(displayWidth/2-100), 
+	(displayHeight/2+80), 
+	20, 200, font,
+	grey, cursor, handle_input)
 
 pointer = pointer.Pointer(displayWidth/2, displayHeight/2, screen)
 
-obj_list = [loadbutton, printbutton, textbox, pointer, cursor]
+obj_list = [pointer, cursor]
+button_list = [loadbutton, printbutton, textbox, textbox2]
 
 #init classes
-saver = savemap.SaveMap(handle_input)
-handler = handler.Handler(obj_list)
-#draw_to = draw.Draw(screen, displayWidth, displayHeight, font, handler)
-
+handler = handler.Handler(obj_list, button_list, handle_input)
 
 clock = pygame.time.Clock()
 
@@ -83,7 +88,7 @@ def start():
 	while not gameExit:
 
 		# user input
-		handle_input.get_input()
+		handle_input.get_input(handler.selected_button)
 		mouse_pos = handle_input.get_mouse_pos() 
 		handler.update(mouse_pos, menu_state, z = handle_input.get_z())
 

@@ -1,4 +1,4 @@
-import pygame
+#import pygame
 
 # colors
 white = (255,255,255)
@@ -15,7 +15,7 @@ class Pointer:
 		self.mouse_pos = (start_x, start_y)
 		self.screen = screen
 
-	def update(self, mouse_pos, z):
+	def update(self, mouse_pos, z, selected_button):
 		self.mouse_pos = mouse_pos
 		self._z = z	
 

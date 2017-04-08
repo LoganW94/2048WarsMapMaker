@@ -1,4 +1,4 @@
-import pygame
+#import pygame
 
 # colors
 white = (255,255,255)
@@ -18,11 +18,12 @@ class Cursor:
 		self.is_clicked = False
 		self.wait = False
 		self.timer = 0
-		self.visible = False
+		self.visible = True
 
-	def update(self, mouse_pos, z):
-		
-		self.blink()				
+	def update(self, mouse_pos, z, selected_button):
+		self.mouse_pos = mouse_pos
+		self.selected_button = selected_button
+		#self.blink()				
 
 	def blink(self):
 
@@ -47,6 +48,6 @@ class Cursor:
 		self._y = y	
 
 	def draw(self, mouse_pos):
-	
+		
 		if self.visible == True:
-			self.screen.fill(black, rect = ((x, y), (1, 11)))
+			self.screen.fill(black, rect = ((self._x, self._y), (2, 15)))

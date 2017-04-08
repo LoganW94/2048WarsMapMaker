@@ -1,11 +1,15 @@
-import pygame
+#import pygame
 import loadmap
 import savemap
 import newmap
 
+
+def test():
+	print("test")
+
 class Button:
 
-	def __init__(self, screen, txt, x, y, height, width, font, color, method):
+	def __init__(self, screen, txt, x, y, height, width, font, color, method = test):
 		self.screen = screen
 		self._txt = txt
 		self._x = x
@@ -26,26 +30,7 @@ class Button:
 		self.clicked_color = (r-10,g-10,b-10)
 		self.colide = False
 		self.pressed = False
-
-	def __init__(self, screen, x, y, height, width, color):
-		self.screen = screen
-		self._x = x
-		self._y = y
-		self._height = height
-		self._width = width
-		self.color = color
-		self.color_init = self.color
-		r = self.color[0]
-		g = self.color[1] 
-		b = self.color[2] 
-		r-=20
-		g-=20
-		b-=20
-		self.new_color = (r,g,b)
-		self.clicked_color = (r-10,g-10,b-10)
-		self.colide = False
-		self.pressed = False
-	
+		self.is_selected = False	
 
 	def update(self, mouse_pos, z):
 		self.mouse_pos = mouse_pos
@@ -64,17 +49,16 @@ class Button:
 			self.colide = True
 		else:
 			self.colide = False	
-
-	def test(self):
-		print(test)		
+		
 
 	def when_pressed(self, z, m):
 		if self.colide == True and z == 1 and self.pressed == False:
 			m()
 			self.pressed = True
+			self.is_selected = True
 		elif z == 0 and self.pressed == True:
-			self.pressed = False		
-			
+			self.pressed = False				
+	
 	def change_color(self, z):
 		
 		if self.colide == True and z == 1:

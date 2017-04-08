@@ -27,9 +27,12 @@ class InputHandler:
 
 		self.font = font
 		self.recieve_input = False
-		self.input_text = ''
 
-	def get_input(self):
+		self.word = ''
+
+	def get_input(self, selected_button):
+		self.selected_button = selected_button
+
 		# get user input
 		for event in pygame.event.get():
 			if event.type == pygame.QUIT:
@@ -41,11 +44,19 @@ class InputHandler:
 			elif event.type == pygame.MOUSEBUTTONDOWN:
 				self._z = 1
 			elif event.type == pygame.MOUSEBUTTONUP:
-				self._z = 0	
-			elif event.type == pygame.KEYDOWN and self.recieve_input == True:		
-				self.input_text += event.key
-	
-# improper use of getter and setter. but it works for now
+				self._z = 0
+			if event.type == pygame.KEYDOWN:
+				if event.key == pygame.K_SPACE:
+					self.word += " "
+				elif event.key == pygame.K_BACKSPACE:
+					self.word = self.word[:-1]
+				else:
+					key = pygame.key.name(event.key)
+					self.word += key		
+
+	def erase(self):
+		self.word = ''	
+
 	def set_mouse_pos(self):
 		self.mouse_pos = (self.cursor_x, self.cursor_y)			
 
@@ -55,17 +66,5 @@ class InputHandler:
 	def get_z(self):
 		return self._z
 
-	def get_text_input(self, input_text):
-		output_text = self.font.render(input_text, True, black)
-		self.screen.blit(output_text, [200,20])
-		print(output_text)
-		return output_text
-
-	def arm(self):
-		self.recieve_input == True
-
-	def dis_arm(self):
-		self.recieve_input == False
-
-	def temp(self):
-		print("I do not think that means what you think it means")
+	def get_text_input(self):							
+		return self.word
