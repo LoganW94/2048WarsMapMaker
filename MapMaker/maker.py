@@ -7,6 +7,7 @@ import button
 import pointer
 import cursor
 import text_box
+import paint_button
 
 pygame.init()
 
@@ -41,8 +42,13 @@ handle_input = inputhandler.InputHandler(screen,
 	displayHeight, 
 	font)
 
+def display_message(message, x, y):
+	screen_text = font.render(message, True, (0,0,0))
+	screen.blit(screen_text, (x,y))
+
 #init objects
 cursor = cursor.Cursor(screen, 0, 0)
+pointer = pointer.Pointer(displayWidth/2, displayHeight/2, screen, black)
 
 loadbutton = button.Button(screen, 
 	'Load', 
@@ -72,10 +78,12 @@ textbox2 = text_box.TextBox(screen,
 	20, 200, font,
 	grey, cursor, handle_input)
 
-pointer = pointer.Pointer(displayWidth/2, displayHeight/2, screen)
+redbutton = paint_button.Paint_Button(screen, 100, 100, 20, font, red, pointer)
+greenbutton = paint_button.Paint_Button(screen, 100, 121, 20, font, green, pointer)
+bluebutton = paint_button.Paint_Button(screen, 100, 142, 20, font, blue, pointer)
 
 obj_list = [pointer, cursor]
-button_list = [loadbutton, printbutton, textbox, textbox2]
+button_list = [loadbutton, printbutton, textbox, textbox2, redbutton, greenbutton, bluebutton]
 
 #init classes
 handler = handler.Handler(obj_list, button_list, handle_input)
@@ -93,6 +101,8 @@ def start():
 		handler.update(mouse_pos, menu_state, z = handle_input.get_z())
 
 		# Draw to screen
+
+		display_message("this is a test", 100, 90)
 		#draw_to.draw(mouse_pos)	
 		screen.fill(white)	
 		handler.draw()

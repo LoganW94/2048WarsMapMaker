@@ -1,5 +1,4 @@
 from button import Button
-import cursor
 
 class TextBox(Button):
 
@@ -19,11 +18,8 @@ class TextBox(Button):
 
 		self.when_pressed(z)
 
-		#print(self.is_selected)
-
 		if self.is_selected == True:
 			self._txt = self.input_handler.get_text_input()
-			print(self._txt)
 
 	def when_pressed(self, z):
 		if self.colide == True and z == 1 and self.pressed == False:

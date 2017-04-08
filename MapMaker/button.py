@@ -1,8 +1,3 @@
-#import pygame
-import loadmap
-import savemap
-import newmap
-
 
 def test():
 	print("test")

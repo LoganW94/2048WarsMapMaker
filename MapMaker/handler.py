@@ -12,7 +12,6 @@ class Handler:
 
 	def update(self, mouse_pos, menu_state, z):
 		self.mouse_pos = mouse_pos
-		#exclude = None
 
 		for i in self._obj_list:
 			i.update(self.mouse_pos, z, self.selected_button)
@@ -26,8 +25,6 @@ class Handler:
 						y.is_selected = False
 
 				self.selected_button = x
-
-		print(self.exclude)
 
 	def draw(self):
 
