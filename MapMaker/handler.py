@@ -22,7 +22,7 @@ class Handler:
 			if x.is_selected == True and x != self.selected_button:
 				self.exclude = self.button_list.index(x)
 				for y in self.button_list:
-					if y != self.exclude:
+					if self.button_list.index(y) != self.exclude:
 						y.is_selected = False
 
 				self.selected_button = x
