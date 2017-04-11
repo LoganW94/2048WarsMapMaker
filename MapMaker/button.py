@@ -25,7 +25,10 @@ class Button:
 		self.clicked_color = (r-10,g-10,b-10)
 		self.colide = False
 		self.pressed = False
-		self.is_selected = False	
+		self.is_selected = False
+		self.outline_color = (0,0,0)
+		self.outline_init = self.outline_color
+		self.clicked_outline_color = (0,50,0)			
 
 	def update(self, mouse_pos, z):
 		self.mouse_pos = mouse_pos
@@ -60,8 +63,10 @@ class Button:
 			self.color = self.clicked_color
 		elif self.colide == True:
 			self.color = self.new_color
+			self.outline_color = self.clicked_outline_color
 		else:
-			self.color = self.color_init	
+			self.color = self.color_init
+			self.outline_color = self.outline_init	
 
 	def draw(self, mouse_pos):
 		self.mouse_pos = mouse_pos
@@ -69,3 +74,10 @@ class Button:
 		self.screen.fill(self.color, rect = ((self._x, self._y), (self._width, self._height)))
 		screen_text = self._font.render(self._txt, True, (0,0,0))
 		self.screen.blit(screen_text, [self._x +4, self._y+2])
+
+		#black outline around boxes
+
+		self.screen.fill(self.outline_color, rect = ((self._x, self._y), (1, self._height)))
+		self.screen.fill(self.outline_color, rect = ((self._x, self._y), (self._width, 1)))
+		self.screen.fill(self.outline_color, rect = ((self._x + self._width, self._y), (1, self._height)))
+		self.screen.fill(self.outline_color, rect = ((self._x, self._y+ self._height), (self._width, 1)))
