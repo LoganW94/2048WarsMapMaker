@@ -1,7 +1,6 @@
 import pygame
 import screen
 import loadmap
-import inputhandler
 import handler
 import button
 import pointer
@@ -35,7 +34,7 @@ screen = screen.get_screen()
 
 #init methods
 loader = loadmap.LoadMap(tempJson)
-handle_input = inputhandler.InputHandler(screen,
+handle_input = handler.Input_Handler(screen,
 	displayWidth, 
 	displayHeight, 
 	font)
@@ -90,7 +89,7 @@ obj_list = [pointer, cursor]
 button_list = [loadbutton, printbutton, textbox, textbox2, redbutton, greenbutton, bluebutton, tile1, tile2, tile3]
 
 #init classes
-handler = handler.Handler(obj_list, button_list, handle_input)
+handler = handler.Obj_Handler(obj_list, button_list, handle_input)
 
 clock = pygame.time.Clock()
 
