@@ -18,7 +18,7 @@ class TextBox(Button):
 
 		self.when_pressed(z)
 
-		if self.is_selected == True:
+		if self.is_selected == True:f
 			self._txt = self.input_handler.get_text_input()
 
 	def when_pressed(self, z):

@@ -6,7 +6,6 @@ import handler
 import button
 import pointer
 import cursor
-import text_box
 
 pygame.init()
 
@@ -65,25 +64,25 @@ printbutton = button.Button(screen,
 	font, grey, 
 	loader.print_file)
 
-textbox = text_box.TextBox(screen, 
+textbox = button.TextBox(screen, 
 	(displayWidth/2-100), 
 	(displayHeight/2+50), 
 	20, 200, font,
 	grey, cursor, handle_input)
 
-textbox2 = text_box.TextBox(screen, 
+textbox2 = button.TextBox(screen, 
 	(displayWidth/2-100), 
 	(displayHeight/2+80), 
 	20, 200, font,
 	grey, cursor, handle_input)
 
-redbutton = text_box.Paint_Button(screen, 100, 100, 20, font, red, pointer)
-greenbutton = text_box.Paint_Button(screen, 100, 121, 20, font, green, pointer)
-bluebutton = text_box.Paint_Button(screen, 100, 142, 20, font, blue, pointer)
+redbutton = button.Paint_Button(screen, 100, 100, 20, font, red, pointer)
+greenbutton = button.Paint_Button(screen, 100, 121, 20, font, green, pointer)
+bluebutton = button.Paint_Button(screen, 100, 142, 20, font, blue, pointer)
 
-tile1 = text_box.Tile(screen, 200, 100, 20, font, white, pointer)
-tile2 = text_box.Tile(screen, 200, 121, 20, font, white, pointer)
-tile3 = text_box.Tile(screen, 200, 142, 20, font, white, pointer)
+tile1 = button.Tile(screen, 200, 100, 20, font, white, pointer)
+tile2 = button.Tile(screen, 200, 121, 20, font, white, pointer)
+tile3 = button.Tile(screen, 200, 142, 20, font, white, pointer)
 
 tile_arr = []
 
