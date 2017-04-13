@@ -28,8 +28,8 @@ class Button:
 		self.check_collide()
 
 		self.change_color(z)
-		m = self.method
-		self.when_pressed(z,m)
+		
+		self.when_pressed(z)
 
 	def check_collide(self):
 		mx = self.mouse_pos[0]
@@ -41,9 +41,9 @@ class Button:
 			self.colide = False	
 		
 
-	def when_pressed(self, z, m):
+	def when_pressed(self, z):
 		if self.colide == True and z == 1 and self.pressed == False:
-			m()
+			self.method()
 			self.pressed = True
 			self.is_selected = True
 		elif z == 0 and self.pressed == True:

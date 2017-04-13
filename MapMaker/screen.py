@@ -3,13 +3,10 @@ import pygame
 class Screen:
 
 	def __init__(self, width, height, color):
-		self.width = width
-		self.height = height
-		self.background_color = color
 
-		pygame.init()
+		#pygame.init()
 
-		self.screen = pygame.display.set_mode((self.width,self.height))
+		self.screen = pygame.display.set_mode((width, height))
 
 		pygame.display.set_caption('MapMaker Alpha')
 

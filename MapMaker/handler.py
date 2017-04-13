@@ -8,39 +8,67 @@ green = (0,255,0)
 blue = (0,0,255)
 grey = (211,211,211)
 
-class Obj_Handler:
+class Handler:
 	
-	def __init__(self, obj_list, button_list, input_handler):
-		self._temp = 0
-		self._obj_list = obj_list
-		self.button_list = button_list
+	def __init__(self):
+		
 		self.selected_button = None
-		self.input_handler = input_handler
 		self.exclude = None
 
-	def update(self, mouse_pos, menu_state, z):
-		self.mouse_pos = mouse_pos
+		self._z = 0	
+
+		self.recieve_input = False
+
+		self.word = ''
+
+	def set_lists(self, obj_list, button_list, tile_arr):
+		self._obj_list = obj_list
+		self.button_list = button_list
+		self.tile_arr = tile_arr
+
+	def set_screen_size(self, screen, displayWidth, displayHeight):
+		self.screen = screen
+		self.cursor_x = displayWidth/2
+		self.cursor_y = displayHeight/2
+
+		self.set_mouse_pos()
+
+		self.displayWidth = displayWidth
+		self.displayHeight = displayHeight
+		
+		pygame.mouse.set_pos(self.mouse_pos)
+		pygame.mouse.set_visible(False)		
+
+	def update(self):
+		self.get_input()
 
 		for i in self._obj_list:
-			i.update(self.mouse_pos, z, self.selected_button)
+			i.update(self.mouse_pos, self._z, self.selected_button)
 
 		for x in self.button_list:
-			x.update(self.mouse_pos, z)
+			x.update(self.mouse_pos, self._z)
 			if x.is_selected == True and x != self.selected_button:
 				self.exclude = self.button_list.index(x)
 				for y in self.button_list:
 					if self.button_list.index(y) != self.exclude:
-						y.is_selected = False
+						y.is_selected = False			
 
-				self.selected_button = x
+				self.selected_button = x	
+
+		for i in self.tile_arr:
+			i.update(self.mouse_pos, self._z)			
 
 	def draw(self):
+		self.screen.fill(white)
 
 		for x in self.button_list:
 			x.draw(self.mouse_pos)
 
 		for i in self._obj_list:
 			i.draw(self.mouse_pos)
+
+		for y in self.tile_arr:
+			y.draw(self.mouse_pos)	
 	
 
 	def get_obj_list(self):
@@ -49,32 +77,8 @@ class Obj_Handler:
 	def get_mouse_pos(self):
 		return self.mouse_pos
 
-
-class Input_Handler:
-
-	def __init__(self, screen, displayWidth, displayHeight, font):
-		self._z = 0
-
-		self.cursor_x = displayWidth/2
-		self.cursor_y = displayHeight/2
-
-		self.set_mouse_pos()
-
-		self.screen = screen
-		self.displayWidth = displayWidth
-		self.displayHeight = displayHeight
-		
-		pygame.mouse.set_pos(self.mouse_pos)
-		pygame.mouse.set_visible(False)
-
-		self.font = font
-		self.recieve_input = False
-
-		self.word = ''
-
-	def get_input(self, selected_button):
-		self.selected_button = selected_button
-
+	def get_input(self):
+	
 		# get user input
 		for event in pygame.event.get():
 			if event.type == pygame.QUIT:
@@ -105,8 +109,5 @@ class Input_Handler:
 	def get_mouse_pos(self):
 		return self.mouse_pos
 
-	def get_z(self):
-		return self._z
-
 	def get_text_input(self):							
-		return self.word		
+		return self.word				
