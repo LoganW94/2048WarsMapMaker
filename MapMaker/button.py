@@ -1,10 +1,10 @@
 
-def test():
-	print("test")
+def default():
+	print("default")
 
 class Button:
 
-	def __init__(self, screen, txt, x, y, height, width, font, color, method = test):
+	def __init__(self, screen, txt, x, y, height, width, font, color, active_state, method = default):
 		self.screen = screen
 		self._txt = txt
 		self._x = x
@@ -13,7 +13,9 @@ class Button:
 		self._width = width
 		self._font = font
 		self.color = color
+		self.active_state = active_state
 		self.method = method
+
 		self.color_init = self.color
 		self.colide = False
 		self.pressed = False
@@ -22,14 +24,17 @@ class Button:
 		self.outline_init = self.outline_color
 		self.clicked_outline_color = (0,50,0)			
 
-	def update(self, mouse_pos, z):
+	def update(self, mouse_pos, z, state):
 		self.mouse_pos = mouse_pos
+		current_state = state
 
-		self.check_collide()
+		if current_state == self.active_state:
+		 
+			self.check_collide()
 
-		self.change_color(z)
-		
-		self.when_pressed(z)
+			self.change_color(z)
+
+			self.when_pressed(z)
 
 	def check_collide(self):
 		mx = self.mouse_pos[0]
@@ -98,45 +103,51 @@ class Button:
 			self.color = self.color_init
 			self.outline_color = self.outline_init	
 
-	def draw(self, mouse_pos):
-		self.mouse_pos = mouse_pos
+	def draw(self, state):
+		current_state = state
 
-		self.screen.fill(self.color, rect = ((self._x, self._y), (self._width, self._height)))
-		screen_text = self._font.render(self._txt, True, (0,0,0))
-		self.screen.blit(screen_text, [self._x +4, self._y+2])
+		if current_state == self.active_state:
 
-		#black outline around boxes
+			self.screen.fill(self.color, rect = ((self._x, self._y), (self._width, self._height)))
+			screen_text = self._font.render(self._txt, True, (0,0,0))
+			self.screen.blit(screen_text, [self._x +4, self._y+2])
 
-		self.screen.fill(self.outline_color, rect = ((self._x, self._y), (1, self._height)))
-		self.screen.fill(self.outline_color, rect = ((self._x, self._y), (self._width, 1)))
-		self.screen.fill(self.outline_color, rect = ((self._x + self._width, self._y), (1, self._height)))
-		self.screen.fill(self.outline_color, rect = ((self._x, self._y+ self._height), (self._width, 1)))
+			#black outline around boxes
+
+			self.screen.fill(self.outline_color, rect = ((self._x, self._y), (1, self._height)))
+			self.screen.fill(self.outline_color, rect = ((self._x, self._y), (self._width, 1)))
+			self.screen.fill(self.outline_color, rect = ((self._x + self._width, self._y), (1, self._height)))
+			self.screen.fill(self.outline_color, rect = ((self._x, self._y+ self._height), (self._width, 1)))
 
 
-class TextBox(Button):
+class Text_Box(Button):
 
-	def __init__(self, screen, x, y, height, width, font, color, cursor, input_handler ):
+	def __init__(self, screen, x, y, height, width, font, active_state, cursor, handler):
 		self.cursor = cursor
-		self.input_handler = input_handler
+		self.handler = handler
 		self.word = None
 		self._txt = " "
-		Button.__init__(self, screen, self._txt, x, y, height, width, font, (200,200,200))
+		self.active_state = active_state
+		Button.__init__(self, screen, self._txt, x, y, height, width, font, (200,200,200), self.active_state)
 
-	def update(self, mouse_pos, z):
+	def update(self, mouse_pos, z, state):
 		self.mouse_pos = mouse_pos
+		current_state = state
 
-		self.check_collide()
+		if current_state == self.active_state:
 
-		self.change_color(z)
+			self.check_collide()
 
-		self.when_pressed(z)
+			self.change_color(z)
+
+			self.when_pressed(z)
 
 		if self.is_selected == True:
-			self._txt = self.input_handler.get_text_input()
+			self._txt = self.handler.get_text_input()
 
 	def when_pressed(self, z):
 		if self.colide == True and z == 1 and self.pressed == False:
-			self.input_handler.erase()
+			self.handler.erase()
 			self.pressed = True	
 			self.cursor.set_x(self._x+2)
 			self.cursor.set_y(self._y+2)
@@ -144,23 +155,30 @@ class TextBox(Button):
 		elif z == 0 and self.pressed == True:
 			self.pressed = False
 
+	def get_text(self):
+		return self._txt		
+
 
 class Paint_Button(Button):
 
-	def __init__(self, screen, x, y, size, font, color, pointer):
+	def __init__(self, screen, x, y, size, font, color, active_state, pointer):
 		self.size = size
 		self.color = color
+		self.active_state = active_state
 		self.pointer = pointer
-		Button.__init__(self, screen, " ", x, y, self.size, self.size, font, color)
+		Button.__init__(self, screen, " ", x, y, self.size, self.size, font, color, self.active_state)
 
-	def	update(self, mouse_pos, z):
+	def update(self, mouse_pos, z, state):
 		self.mouse_pos = mouse_pos
+		current_state = state
 
-		self.check_collide()
+		if current_state == self.active_state:
 
-		self.when_pressed(z)
+			self.check_collide()
 
-		self.change_color(z)
+			self.when_pressed(z)
+
+			self.change_color(z)
 
 	def when_pressed(self, z):
 		if self.colide == True and z == 1 and self.pressed == False:
@@ -180,14 +198,17 @@ class Tile(Button):
 		self.pointer = pointer
 		Button.__init__(self, screen, " ", x, y, self.size, self.size, font, color)	
 
-	def update(self, mouse_pos, z):	
+	def update(self, mouse_pos, z, state):
 		self.mouse_pos = mouse_pos
+		current_state = state
 
-		self.check_collide()
+		if current_state == self.active_state:
 
-		self.when_pressed(z)
+			self.check_collide()
 
-		self.change_color(z)
+			self.when_pressed(z)
+
+			self.change_color(z)
 
 	def when_pressed(self, z):
 		if self.colide == True and z == 1 and self.pressed == False:

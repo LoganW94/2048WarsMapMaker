@@ -11,19 +11,16 @@ handler = handler.Handler()
 app = app.App(handler)
 
 def start():
-	#init classes
 
 	gameExit = False
 
 	while not gameExit:
 
-		# user input
-		handler.update()
-
-		# Draw to screen		
+		handler.update(app.get_menu_state())
+		
 		handler.draw()
 	
-		# Update screen
+		"Update screen"
 		pygame.display.update()
 		clock.tick(FPS)
 

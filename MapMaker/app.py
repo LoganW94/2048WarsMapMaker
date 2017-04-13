@@ -4,8 +4,9 @@ import handler
 import button
 import pointer
 import cursor
+import newmap
 
-# colors
+"colors"
 white = (255,255,255)
 black = (0,0,0)
 red = (255,0,0)
@@ -17,55 +18,63 @@ class App:
 	'this class handles the apps design'
 	def __init__(self, handler):
 		
-		# variables  
+		"variables"  
 		displayWidth = 800
 		displayHeight = 600
-		menu_state = 0
+		self.menu_state = 0
 
 		##########################################################################################
 		"design app here"
 
 		font = pygame.font.SysFont(None, 25)
 
-		# define display
+		"define display"
 		display = screen.Screen(displayWidth, displayHeight, white)
 		display = display.get_screen()
 
-		#init objects
-		mouse_cursor = cursor.Cursor(display, 0, 0)
+		"init objects"
+		mouse_cursor = cursor.Cursor(display, -10, -10)
 		mouse_pointer = pointer.Pointer(displayWidth/2, displayHeight/2, display, black)
 
-		printbutton = button.Button(display, 
-			'Print', 
-			(displayWidth/2-25), 
-			(displayHeight/2+20), 
-			20, 50, 
-			font, grey, 
-			self.print_temp)
+		"menu_state 0 objects"
+		state_0 = 0
 
-		textbox = button.TextBox(display, 
-			(displayWidth/2-100), 
-			(displayHeight/2+50), 
-			20, 200, font,
-			grey, mouse_cursor, handler)
+		new_button = button.Button(display, "New Map", 360, 280, 20, 80, font, grey, state_0, self.create_new_map)
 
-		redbutton = button.Paint_Button(display, 100, 100, 20, font, red, mouse_pointer)
-		greenbutton = button.Paint_Button(display, 100, 121, 20, font, green, mouse_pointer)
-		bluebutton = button.Paint_Button(display, 100, 142, 20, font, blue, mouse_pointer)
+		load_button =  button.Button(display, "Load Map", 360, 310, 20, 85, font, grey, state_0, self.load_temp)
 
-		tile1 = button.Tile(display, 200, 100, 20, font, white, mouse_pointer)
-		tile2 = button.Tile(display, 200, 121, 20, font, white, mouse_pointer)
-		tile3 = button.Tile(display, 200, 142, 20, font, white, mouse_pointer)
+		'menu_state 1 objects'
+		state_1 = 1
 
+		textbox = button.Text_Box(display, 200, 200, 20, 100, font, state_1, mouse_cursor, handler)
+
+		print_button = button.Button(display, "Load Map", 360, 310, 20, 85, font, grey, state_1, self.print_temp)
+
+		"don't touch these, just add relevent instances. Leave empty brackets if list not needed"
+		tile_arr = []
+		obj_list = [mouse_pointer, mouse_cursor]
+		button_list = [new_button, load_button]
 		##########################################################################################		
 
-		tile_arr = [tile1, tile2, tile3]
-
-		obj_list = [mouse_pointer, mouse_cursor]
-		button_list = [printbutton, textbox, redbutton, greenbutton, bluebutton]	
-
 		handler.set_lists(obj_list, button_list, tile_arr)
-		handler.set_screen_size(display, displayWidth, displayHeight)
+		handler.set_screen(display, displayWidth, displayHeight)
+
+	
+	def get_menu_state(self):
+		return(self.menu_state)
+
+	def set_menu_state(self, menu_state):
+		self.menu_state = menu_state
+
+	###############################################################################################
+	'Add app specific methods here'
 
 	def print_temp(self):
-		print("print button")	
+		print("print button")
+
+	def load_temp(self):
+		print("load button")
+
+	def create_new_map(self):
+		grid = newmap.New_Map()
+		self.set_menu_state(1)

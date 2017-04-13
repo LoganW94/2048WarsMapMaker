@@ -12,13 +12,11 @@ class Handler:
 	
 	def __init__(self):
 		
+		'init variable'
 		self.selected_button = None
 		self.exclude = None
-
 		self._z = 0	
-
 		self.recieve_input = False
-
 		self.word = ''
 
 	def set_lists(self, obj_list, button_list, tile_arr):
@@ -26,7 +24,7 @@ class Handler:
 		self.button_list = button_list
 		self.tile_arr = tile_arr
 
-	def set_screen_size(self, screen, displayWidth, displayHeight):
+	def set_screen(self, screen, displayWidth, displayHeight):
 		self.screen = screen
 		self.cursor_x = displayWidth/2
 		self.cursor_y = displayHeight/2
@@ -39,14 +37,16 @@ class Handler:
 		pygame.mouse.set_pos(self.mouse_pos)
 		pygame.mouse.set_visible(False)		
 
-	def update(self):
+	def update(self, menu_state):
+		self.menu_state = menu_state
+		print(menu_state)
 		self.get_input()
 
 		for i in self._obj_list:
 			i.update(self.mouse_pos, self._z, self.selected_button)
 
 		for x in self.button_list:
-			x.update(self.mouse_pos, self._z)
+			x.update(self.mouse_pos, self._z, self.menu_state)
 			if x.is_selected == True and x != self.selected_button:
 				self.exclude = self.button_list.index(x)
 				for y in self.button_list:
@@ -56,33 +56,25 @@ class Handler:
 				self.selected_button = x	
 
 		for i in self.tile_arr:
-			i.update(self.mouse_pos, self._z)			
+			i.update(self.mouse_pos, self._z, self.menu_state)			
 
 	def draw(self):
 		self.screen.fill(white)
 
 		for x in self.button_list:
-			x.draw(self.mouse_pos)
+			x.draw(self.menu_state)
 
 		for i in self._obj_list:
 			i.draw(self.mouse_pos)
 
 		for y in self.tile_arr:
 			y.draw(self.mouse_pos)	
-	
-
-	def get_obj_list(self):
-		return self._obj_list	
-
-	def get_mouse_pos(self):
-		return self.mouse_pos
 
 	def get_input(self):
-	
-		# get user input
+
 		for event in pygame.event.get():
 			if event.type == pygame.QUIT:
-				# closes out pygame and python script
+				"closes out pygame and python script"
 				pygame.quit()
 				quit()
 			elif event.type == pygame.MOUSEMOTION:
@@ -105,9 +97,6 @@ class Handler:
 
 	def set_mouse_pos(self):
 		self.mouse_pos = (self.cursor_x, self.cursor_y)			
-
-	def get_mouse_pos(self):
-		return self.mouse_pos
 
 	def get_text_input(self):							
 		return self.word				
