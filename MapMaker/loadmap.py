@@ -1,33 +1,28 @@
 import json
 
-class LoadMap:
+class Load_Map:
 	"""Loads map from designated file"""
 
 	def __init__(self, url):
-		self.url = url
+		self.open_file(url)
 
 
-	def open_file(self):
+	def open_file(self, url):
+		
+		url = url + ".json"
+		print(url)
 		try:
-			with open(self.url, "r") as f:
-				self.text = f.read()
+			with open(url, "r") as f:
+				text = f.read()
 				f.close
-				
+				self.parsed_file = json.loads(text)
 		except:
 			print('no such file')
 
-		self.parsed_file = json.loads(self.text)			
 
-	def print_file(self):
+	def get_file(self):
 		try:
-			print(self.parsed_file)
+			return self.parsed_file
 		except:
-			print('no file loaded')
-		
-
-	def get_text(self):
-		try:
-			return self.text
-		except:
-			print('no file loaded')
+			print("can't retrieve file")
 				

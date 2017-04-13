@@ -37,16 +37,15 @@ class Handler:
 		pygame.mouse.set_pos(self.mouse_pos)
 		pygame.mouse.set_visible(False)		
 
-	def update(self, menu_state):
-		self.menu_state = menu_state
-		print(menu_state)
+	def update(self, current_state):
+		self.current_state = current_state
 		self.get_input()
 
 		for i in self._obj_list:
 			i.update(self.mouse_pos, self._z, self.selected_button)
 
 		for x in self.button_list:
-			x.update(self.mouse_pos, self._z, self.menu_state)
+			x.update(self.mouse_pos, self._z, self.current_state)
 			if x.is_selected == True and x != self.selected_button:
 				self.exclude = self.button_list.index(x)
 				for y in self.button_list:
@@ -56,19 +55,19 @@ class Handler:
 				self.selected_button = x	
 
 		for i in self.tile_arr:
-			i.update(self.mouse_pos, self._z, self.menu_state)			
+			i.update(self.mouse_pos, self._z, self.current_state)			
 
 	def draw(self):
 		self.screen.fill(white)
 
 		for x in self.button_list:
-			x.draw(self.menu_state)
+			x.draw(self.current_state)
 
 		for i in self._obj_list:
 			i.draw(self.mouse_pos)
 
 		for y in self.tile_arr:
-			y.draw(self.mouse_pos)	
+			y.draw(self.mouse_pos, self.current_state)	
 
 	def get_input(self):
 

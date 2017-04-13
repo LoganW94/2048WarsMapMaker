@@ -16,7 +16,7 @@ def start():
 
 	while not gameExit:
 
-		handler.update(app.get_menu_state())
+		handler.update(app.get_current_state())
 		
 		handler.draw()
 	

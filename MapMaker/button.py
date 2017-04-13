@@ -24,9 +24,9 @@ class Button:
 		self.outline_init = self.outline_color
 		self.clicked_outline_color = (0,50,0)			
 
-	def update(self, mouse_pos, z, state):
+	def update(self, mouse_pos, z, current_state):
 		self.mouse_pos = mouse_pos
-		current_state = state
+		current_state = current_state
 
 		if current_state == self.active_state:
 		 
@@ -103,8 +103,8 @@ class Button:
 			self.color = self.color_init
 			self.outline_color = self.outline_init	
 
-	def draw(self, state):
-		current_state = state
+	def draw(self, current_state):
+		current_state = current_state
 
 		if current_state == self.active_state:
 
@@ -130,9 +130,9 @@ class Text_Box(Button):
 		self.active_state = active_state
 		Button.__init__(self, screen, self._txt, x, y, height, width, font, (200,200,200), self.active_state)
 
-	def update(self, mouse_pos, z, state):
+	def update(self, mouse_pos, z, current_state):
 		self.mouse_pos = mouse_pos
-		current_state = state
+		current_state = current_state
 
 		if current_state == self.active_state:
 
@@ -168,9 +168,9 @@ class Paint_Button(Button):
 		self.pointer = pointer
 		Button.__init__(self, screen, " ", x, y, self.size, self.size, font, color, self.active_state)
 
-	def update(self, mouse_pos, z, state):
+	def update(self, mouse_pos, z, current_state):
 		self.mouse_pos = mouse_pos
-		current_state = state
+		current_state = current_state
 
 		if current_state == self.active_state:
 
@@ -198,9 +198,9 @@ class Tile(Button):
 		self.pointer = pointer
 		Button.__init__(self, screen, " ", x, y, self.size, self.size, font, color)	
 
-	def update(self, mouse_pos, z, state):
+	def update(self, mouse_pos, z, current_state):
 		self.mouse_pos = mouse_pos
-		current_state = state
+		current_state = current_state
 
 		if current_state == self.active_state:
 
