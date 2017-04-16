@@ -55,16 +55,21 @@ class Button:
 			self.pressed = False				
 	
 	def change_color(self, z):
+
+		r = self.color[0]
+		g = self.color[1] 
+		b = self.color[2]
+		r2 = self.outline_color[0]
+		g2 = self.outline_color[1]
+		b2 = self.outline_color[2]
 		
 		if self.colide == True and z == 1:
+			r2-20
+			g2-20
+			b2-20
+			self.clicked_color = (r2,g2,b2)
 			self.color = self.clicked_color
 		elif self.colide == True:
-			r = self.color[0]
-			g = self.color[1] 
-			b = self.color[2]
-			r2 = self.outline_color[0]
-			g2 = self.outline_color[1]
-			b2 = self.outline_color[2]
 
 			if r <=20 or r2 <= 20:
 				g-20
@@ -191,10 +196,11 @@ class Paint_Button(Button):
 
 class Tile(Button):
 
-	def __init__(self, screen, x, y, size, font, color, pointer):
+	def __init__(self, screen, x, y, size, font, color, active_state, pointer):
 		self.size = size
 		self.default_color = color
 		self.color = self.default_color
+		self.active_state = active_state
 		self.pointer = pointer
 		Button.__init__(self, screen, " ", x, y, self.size, self.size, font, color)	
 
@@ -248,3 +254,18 @@ class Tile(Button):
 			self.outline_color = self.clicked_color
 		else:
 			self.outline_color = self.outline_init	
+
+class Display_Box(Button):
+
+	def __init__(self, screen, txt, x, y, height, width, font, color, active_state):
+		self._txt = txt
+		self.default_color = color
+		self.color = self.default_color
+		self.active_state = active_state
+		Button.__init__(self, screen, self._txt, x, y, height, width, font, self.color, self.active_state)
+		
+	def update(self, mouse_pos, z, current_state):
+		self.mouse_pos = mouse_pos
+		current_state = current_state
+
+			
