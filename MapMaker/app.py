@@ -39,18 +39,18 @@ class App:
 
 		"define display"
 		display = screen.Screen(displayWidth, displayHeight, white)
-		display = display.get_screen()
+		self.display = display.get_screen()
 
 		"init objects"
-		mouse_cursor = cursor.Cursor(display, -10, -10)
-		mouse_pointer = pointer.Pointer(displayWidth/2, displayHeight/2, display, black)
+		mouse_cursor = cursor.Cursor(self.display, -10, -10)
+		mouse_pointer = pointer.Pointer(displayWidth/2, displayHeight/2, self.display, black)
 
 		"Start menu state"
 		state_0 = 0
 
-		_new_button = button.Button(display, "New Map", left_menu_x, left_menu_y, default_height, 80, font, grey, state_0, self.create_new_map)
+		_new_button = button.Button(self.display, "New Map", left_menu_x, left_menu_y, default_height, 80, font, grey, state_0, self.new_map_state)
 
-		_load_button =  button.Button(display, "Load Map", left_menu_x, left_menu_y + 30, default_height, 85, font, grey, state_0, self.load_state)
+		_load_button =  button.Button(self.display, "Load Map", left_menu_x, left_menu_y + 30, default_height, 85, font, grey, state_0, self.load_state)
 
 		'New map state'
 		state_1 = 1
@@ -58,34 +58,39 @@ class App:
 
 		txtbx_y = lngth + 30
 
-		_text_description = button.Display_Box(display, "Map Description", left_menu_x, left_menu_y, default_height, lngth, font, white, state_1)
-		_description = button.Text_Box(display, left_menu_x +txtbx_y, left_menu_y, default_height, 200, font, state_1, mouse_cursor, handler)
+		_text_description = button.Display_Box(self.display, "Map Description", left_menu_x, left_menu_y, default_height, lngth, font, white, state_1)
+		_description = button.Text_Box(self.display, left_menu_x +txtbx_y, left_menu_y, default_height, 200, font, state_1, mouse_cursor, handler)
 
-		_text_mapsize = button.Display_Box(display, "Map Size", left_menu_x, left_menu_y +30, default_height, lngth, font, white, state_1)
-		_mapsize = button.Text_Box(display, left_menu_x +txtbx_y, left_menu_y +30, default_height, 30, font, state_1, mouse_cursor, handler)
+		_text_mapsize = button.Display_Box(self.display, "Map Size", left_menu_x, left_menu_y +30, default_height, lngth, font, white, state_1)
+		_mapsize = button.Text_Box(self.display, left_menu_x +txtbx_y, left_menu_y +30, default_height, 30, font, state_1, mouse_cursor, handler)
 
-		_text_playerone = button.Display_Box(display, "Player Name", left_menu_x, left_menu_y+60, default_height, lngth, font, white, state_1)
-		_playerone = button.Text_Box(display, left_menu_x +txtbx_y, left_menu_y+60, default_height, 75, font, state_1, mouse_cursor, handler)
+		_text_playerone = button.Display_Box(self.display, "Player Name", left_menu_x, left_menu_y+60, default_height, lngth, font, white, state_1)
+		_playerone = button.Text_Box(self.display, left_menu_x +txtbx_y, left_menu_y+60, default_height, 75, font, state_1, mouse_cursor, handler)
 
-		_text_playertwo = button.Display_Box(display, "NPC One", left_menu_x, left_menu_y+90, default_height, lngth, font, white, state_1)
-		_playertwo = button.Text_Box(display, left_menu_x +txtbx_y, left_menu_y+90, default_height, 75, font, state_1, mouse_cursor, handler)
+		_text_playertwo = button.Display_Box(self.display, "NPC One", left_menu_x, left_menu_y+90, default_height, lngth, font, white, state_1)
+		_playertwo = button.Text_Box(self.display, left_menu_x +txtbx_y, left_menu_y+90, default_height, 75, font, state_1, mouse_cursor, handler)
 
-		_text_playerthree = button.Display_Box(display, "NPC Two", left_menu_x, left_menu_y+120, default_height, lngth, font, white, state_1)
-		_playerthree = button.Text_Box(display, left_menu_x +txtbx_y, left_menu_y+120, default_height, 75, font, state_1, mouse_cursor, handler)
+		_text_playerthree = button.Display_Box(self.display, "NPC Two", left_menu_x, left_menu_y+120, default_height, lngth, font, white, state_1)
+		_playerthree = button.Text_Box(self.display, left_menu_x +txtbx_y, left_menu_y+120, default_height, 75, font, state_1, mouse_cursor, handler)
 
-		_text_playerfour = button.Display_Box(display, "NPC Three", left_menu_x, left_menu_y+150, default_height, lngth, font, white, state_1)
-		_playerfour = button.Text_Box(display, left_menu_x +txtbx_y, left_menu_y+150, default_height, 75, font, state_1, mouse_cursor, handler)
+		_text_playerfour = button.Display_Box(self.display, "NPC Three", left_menu_x, left_menu_y+150, default_height, lngth, font, white, state_1)
+		_playerfour = button.Text_Box(self.display, left_menu_x +txtbx_y, left_menu_y+150, default_height, 75, font, state_1, mouse_cursor, handler)
 
-		_save_button = button.Button(display, "Generate Map Grid", left_menu_x, left_menu_y + 200, default_height, 150, font, grey, state_1, self.print_temp)
+		_save_button = button.Button(self.display, "Generate Map Grid", left_menu_x, left_menu_y + 200, default_height, 150, font, grey, state_1, self.create_new_map)
 
 		'Load map state'
 		state_2 = 2
 
-		file_location_box = button.Text_Box(display, left_menu_x, left_menu_y, default_height, 200, font, state_2, mouse_cursor, handler)
+		file_location_box = button.Text_Box(self.display, left_menu_x, left_menu_y, default_height, 200, font, state_2, mouse_cursor, handler)
 
-		load_map_button = button.Button(display, "Load map", left_menu_x, left_menu_y + 30, default_height, 100, font, grey, state_2, self.load_map)
+		load_map_button = button.Button(self.display, "Load map", left_menu_x, left_menu_y + 30, default_height, 100, font, grey, state_2, self.load_map)
 
-		print_map_button = button.Button(display, "print map to console", left_menu_x, left_menu_y + 60, default_height, 200, font, grey, state_2, self.print_map)
+		print_map_button = button.Button(self.display, "print map to console", left_menu_x, left_menu_y + 60, default_height, 200, font, grey, state_2, self.print_map)
+
+		'Mapmaker state'
+		state_3 = 3
+
+
 
 
 		"don't touch these, just add relevent instances. Leave empty brackets if list not needed"
@@ -97,7 +102,7 @@ class App:
 		##########################################################################################		
 
 		handler.set_lists(self.obj_list, self.button_list, self.tile_arr)
-		handler.set_screen(display, displayWidth, displayHeight)
+		handler.set_screen(self.display, displayWidth, displayHeight)
 
 	
 	def get_current_state(self):
@@ -109,16 +114,26 @@ class App:
 	###############################################################################################
 	'Add app specific methods here'
 
-	def print_temp(self):
-		i = self.button_list[2]
-		print(i._txt)
+	def new_map_state(self):
+		self.set_current_state(1)	
 
 	def load_state(self):
 		self.set_current_state(2)
 
+	def	mapmaker_state(self):
+		self.set_current_state(3)
+
 	def create_new_map(self):
-		grid = newmap.New_Map()
-		self.set_current_state(1)
+		description = (self.button_list[3])._txt
+		mapsize = (self.button_list[5])._txt
+		playerone = (self.button_list[7])._txt
+		playertwo = (self.button_list[9])._txt
+		playerthree = (self.button_list[11])._txt
+		playerfour = (self.button_list[13])._txt
+
+		self.map = newmap.New_Map(self.display, description, mapsize, playerone, playertwo, playerthree, playerfour)
+		self.mapmaker_state()
+		
 
 	def load_map(self):
 		i = self.button_list[4]
