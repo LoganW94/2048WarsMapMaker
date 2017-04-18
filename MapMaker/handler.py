@@ -55,7 +55,8 @@ class Handler:
 				self.selected_button = x	
 
 		for i in self.tile_arr:
-			i.update(self.mouse_pos, self._z, self.current_state)			
+			for x in i:
+				x.update(self.mouse_pos, self._z, self.current_state)			
 
 	def draw(self):
 		self.screen.fill(white)
@@ -67,7 +68,8 @@ class Handler:
 			i.draw(self.mouse_pos)
 
 		for y in self.tile_arr:
-			y.draw(self.mouse_pos, self.current_state)	
+			for x in y:
+				x.draw(self.mouse_pos)	
 
 	def get_input(self):
 

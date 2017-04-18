@@ -2,6 +2,8 @@ import button
 
 class New_Map:
 
+	grid = []
+
 	def __init__(self, display, pointer, font, description, mapsize, playerone, playertwo, playerthree, playerfour):
 
 		mapsize = int(mapsize)
@@ -9,15 +11,19 @@ class New_Map:
 		default_y = 200
 		default_size = 15
 
-		grid = [[None] * mapsize] * mapsize
-
-		for y in grid:
-			for x in y:
-				print("x",default_x)
-				x = button.Tile(display, default_x, default_y, default_size, font, (255,255,255), 3, pointer) 
+		row = []
+		self.grid = []
+		for x in range(mapsize):
+			for y in range(mapsize):
+				tile = button.Tile(display, default_x, default_y, default_size, font, (255,255,255), 3, pointer)
+				row.append(tile)
 				default_x += default_size
-			print("y", default_y)
-			default_y += default_size	
 
-		print(description, mapsize, playerone, playertwo, playerthree, playerfour, grid)
+			self.grid.append(row)	
+			default_y += default_size	
+			 
+		#print(description, mapsize, playerone, playertwo, playerthree, playerfour, self.grid)
 		
+
+	def get_grid(self):
+		return self.grid	

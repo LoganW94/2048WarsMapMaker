@@ -20,6 +20,8 @@ grey = (211,211,211)
 class App:
 	'this class handles the apps design'
 	def __init__(self, handler):
+
+		self.handler = handler
 		
 		"variables"  
 		displayWidth = 800
@@ -41,7 +43,7 @@ class App:
 		self.playertwo = None
 		self.playerthree = None
 		self.playerfour = None
-		self.grid = None
+		self.grid = []
 
 		self.font = pygame.font.SysFont(None, 25)
 
@@ -67,29 +69,29 @@ class App:
 		txtbx_y = lngth + 30
 
 		_text_description = button.Display_Box(self.display, "Map Description", left_menu_x, left_menu_y, default_height, lngth, self.font, white, state_1)
-		_description = button.Text_Box(self.display, left_menu_x +txtbx_y, left_menu_y, default_height, 200, self.font, state_1, self.mouse_cursor, handler)
+		_description = button.Text_Box(self.display, left_menu_x +txtbx_y, left_menu_y, default_height, 200, self.font, state_1, self.mouse_cursor, self.handler)
 
 		_text_mapsize = button.Display_Box(self.display, "Map Size", left_menu_x, left_menu_y +30, default_height, lngth, self.font, white, state_1)
-		_mapsize = button.Text_Box(self.display, left_menu_x +txtbx_y, left_menu_y +30, default_height, 30, self.font, state_1, self.mouse_cursor, handler)
+		_mapsize = button.Text_Box(self.display, left_menu_x +txtbx_y, left_menu_y +30, default_height, 30, self.font, state_1, self.mouse_cursor, self.handler)
 
 		_text_playerone = button.Display_Box(self.display, "Player Name", left_menu_x, left_menu_y+60, default_height, lngth, self.font, white, state_1)
-		_playerone = button.Text_Box(self.display, left_menu_x +txtbx_y, left_menu_y+60, default_height, 75, self.font, state_1, self.mouse_cursor, handler)
+		_playerone = button.Text_Box(self.display, left_menu_x +txtbx_y, left_menu_y+60, default_height, 75, self.font, state_1, self.mouse_cursor, self.handler)
 
 		_text_playertwo = button.Display_Box(self.display, "NPC One", left_menu_x, left_menu_y+90, default_height, lngth, self.font, white, state_1)
-		_playertwo = button.Text_Box(self.display, left_menu_x +txtbx_y, left_menu_y+90, default_height, 75, self.font, state_1, self.mouse_cursor, handler)
+		_playertwo = button.Text_Box(self.display, left_menu_x +txtbx_y, left_menu_y+90, default_height, 75, self.font, state_1, self.mouse_cursor, self.handler)
 
 		_text_playerthree = button.Display_Box(self.display, "NPC Two", left_menu_x, left_menu_y+120, default_height, lngth, self.font, white, state_1)
-		_playerthree = button.Text_Box(self.display, left_menu_x +txtbx_y, left_menu_y+120, default_height, 75, self.font, state_1, self.mouse_cursor, handler)
+		_playerthree = button.Text_Box(self.display, left_menu_x +txtbx_y, left_menu_y+120, default_height, 75, self.font, state_1, self.mouse_cursor, self.handler)
 
 		_text_playerfour = button.Display_Box(self.display, "NPC Three", left_menu_x, left_menu_y+150, default_height, lngth, self.font, white, state_1)
-		_playerfour = button.Text_Box(self.display, left_menu_x +txtbx_y, left_menu_y+150, default_height, 75, self.font, state_1, self.mouse_cursor, handler)
+		_playerfour = button.Text_Box(self.display, left_menu_x +txtbx_y, left_menu_y+150, default_height, 75, self.font, state_1, self.mouse_cursor, self.handler)
 
 		_save_button = button.Button(self.display, "Generate Map Grid", left_menu_x, left_menu_y + 200, default_height, 150, self.font, grey, state_1, self.create_new_map)
 
 		'Load map state'
 		state_2 = 2
 
-		_file_location_box = button.Text_Box(self.display, left_menu_x, left_menu_y, default_height, 200, self.font, state_2, self.mouse_cursor, handler)
+		_file_location_box = button.Text_Box(self.display, left_menu_x, left_menu_y, default_height, 200, self.font, state_2, self.mouse_cursor, self.handler)
 
 		_load_map_button = button.Button(self.display, "Load map", left_menu_x, left_menu_y + 30, default_height, 100, self.font, grey, state_2, self.load_map)
 
@@ -98,19 +100,20 @@ class App:
 		'Mapmaker state'
 		state_3 = 3
 
-
-
+		_paint = button.Paint_Button(self.display, left_menu_x, left_menu_y, default_height, self.font, red, state_3, self.mouse_pointer)
+		_tile = button.Tile(display, left_menu_x + default_height, left_menu_y, default_height, self.font, (255,255,255), state_3, pointer)
 
 		"don't touch these, just add relevent instances. Leave empty brackets if list not needed"
-		self.tile_arr = self.grid
+		self.tile_arr =[[_tile]] 
 		self.obj_list = [self.mouse_pointer, self.mouse_cursor]
 		self.button_list = [_new_button, _load_button, 
 		_text_description, _description, _text_mapsize, _mapsize, _text_playerone, _playerone, _text_playertwo, _playertwo, _text_playerthree, _playerthree, _text_playerfour, _playerfour, _save_button, 
-		_file_location_box, _load_map_button, _print_map_button]
+		_file_location_box, _load_map_button, _print_map_button, 
+		_paint]
 		##########################################################################################		
 
-		handler.set_lists(self.obj_list, self.button_list, self.tile_arr)
-		handler.set_screen(self.display, displayWidth, displayHeight)
+		self.handler.set_lists(self.obj_list, self.button_list, self.tile_arr)
+		self.handler.set_screen(self.display, displayWidth, displayHeight)
 
 	
 	def get_current_state(self):
@@ -141,7 +144,8 @@ class App:
 
 		self.map = newmap.New_Map(self.display, self.mouse_pointer, self.font, self.description, self.mapsize, self.playerone, self.playertwo, self.playerthree, self.playerfour)
 		self.mapmaker_state()
-		
+		self.tile_arr = self.map.get_grid()
+		self.handler.set_lists(self.obj_list, self.button_list, self.tile_arr)
 
 	def load_map(self):
 		i = self.button_list[4]
