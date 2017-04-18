@@ -202,7 +202,7 @@ class Tile(Button):
 		self.color = self.default_color
 		self.active_state = active_state
 		self.pointer = pointer
-		Button.__init__(self, screen, " ", x, y, self.size, self.size, font, color)	
+		Button.__init__(self, screen, " ", x, y, self.size, self.size, font, color, self.active_state)	
 
 	def update(self, mouse_pos, z, current_state):
 		self.mouse_pos = mouse_pos
