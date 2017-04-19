@@ -64,14 +64,16 @@ class Handler:
 		for x in self.button_list:
 			x.draw(self.current_state)
 
-		for i in self._obj_list:
-			i.draw(self.mouse_pos)
-
 		for y in self.tile_arr:
 			for x in y:
-				x.draw(self.mouse_pos)	
+				x.draw(self.current_state)
+
+		for i in self._obj_list:
+			i.draw(self.mouse_pos)			
 
 	def get_input(self):
+
+		alphabet = ['a','b','c','d','e','f','g','h','i','j','k','l','m','n','o','p','q','r','s','t','u','v','x','y','z']
 
 		for event in pygame.event.get():
 			if event.type == pygame.QUIT:

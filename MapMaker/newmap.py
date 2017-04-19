@@ -7,9 +7,11 @@ class New_Map:
 	def __init__(self, display, pointer, font, description, mapsize, playerone, playertwo, playerthree, playerfour):
 
 		mapsize = int(mapsize)
+
 		default_x = 200
-		default_y = 200
-		default_size = 15
+		default_y = 150
+		init_x = default_x
+		default_size = 25
 
 		row = []
 		self.grid = []
@@ -20,9 +22,9 @@ class New_Map:
 				default_x += default_size
 
 			self.grid.append(row)	
-			default_y += default_size	
-			 
-		#print(description, mapsize, playerone, playertwo, playerthree, playerfour, self.grid)
+			default_y += default_size
+			default_x = init_x
+
 		
 
 	def get_grid(self):

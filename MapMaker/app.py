@@ -26,7 +26,7 @@ class App:
 		"variables"  
 		displayWidth = 800
 		displayHeight = 600
-		self.current_state = 0
+		self.current_state = 1
 
 		##########################################################################################
 		"design app here"
@@ -100,16 +100,26 @@ class App:
 		'Mapmaker state'
 		state_3 = 3
 
-		_paint = button.Paint_Button(self.display, left_menu_x, left_menu_y, default_height, self.font, red, state_3, self.mouse_pointer)
-		_tile = button.Tile(display, left_menu_x + default_height, left_menu_y, default_height, self.font, (255,255,255), state_3, pointer)
+		'make orange'
+		_paint_red = button.Paint_Button(self.display, left_menu_x, left_menu_y, default_height, self.font, red, state_3, self.mouse_pointer)
+		_paint_green = button.Paint_Button(self.display, left_menu_x, left_menu_y+default_height, default_height, self.font, green, state_3, self.mouse_pointer)
+		_paint_grey = button.Paint_Button(self.display, left_menu_x, left_menu_y+(default_height*2), default_height, self.font, grey, state_3, self.mouse_pointer)
+		_paint_white = button.Paint_Button(self.display, left_menu_x, left_menu_y+(default_height*3), default_height, self.font, white, state_3, self.mouse_pointer)
+		_paint_blue = button.Paint_Button(self.display, left_menu_x, left_menu_y+(default_height*4), default_height, self.font, blue, state_3, self.mouse_pointer)
+		'yellow'
+		'purple'
+		'violet'
+
+		_
+	
 
 		"don't touch these, just add relevent instances. Leave empty brackets if list not needed"
-		self.tile_arr =[[_tile]] 
+		self.tile_arr =[[]] 
 		self.obj_list = [self.mouse_pointer, self.mouse_cursor]
 		self.button_list = [_new_button, _load_button, 
 		_text_description, _description, _text_mapsize, _mapsize, _text_playerone, _playerone, _text_playertwo, _playertwo, _text_playerthree, _playerthree, _text_playerfour, _playerfour, _save_button, 
 		_file_location_box, _load_map_button, _print_map_button, 
-		_paint]
+		_paint_red, _paint_green, _paint_grey, _paint_white, _paint_blue]
 		##########################################################################################		
 
 		self.handler.set_lists(self.obj_list, self.button_list, self.tile_arr)
