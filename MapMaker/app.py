@@ -16,6 +16,10 @@ red = (255,0,0)
 green = (0,255,0)
 blue = (0,0,255)
 grey = (211,211,211)
+yellow = (255,255,0)
+violet = (140,43,226)
+purple = (160,32,240)
+orange = (255,165,0)
 
 class App:
 	'this class handles the apps design'
@@ -101,16 +105,16 @@ class App:
 		state_3 = 3
 
 		'make orange'
-		_paint_red = button.Paint_Button(self.display, left_menu_x, left_menu_y, default_height, self.font, red, state_3, self.mouse_pointer)
+		_paint_orange = button.Paint_Button(self.display, left_menu_x, left_menu_y, default_height, self.font, orange, state_3, self.mouse_pointer)
 		_paint_green = button.Paint_Button(self.display, left_menu_x, left_menu_y+default_height, default_height, self.font, green, state_3, self.mouse_pointer)
 		_paint_grey = button.Paint_Button(self.display, left_menu_x, left_menu_y+(default_height*2), default_height, self.font, grey, state_3, self.mouse_pointer)
 		_paint_white = button.Paint_Button(self.display, left_menu_x, left_menu_y+(default_height*3), default_height, self.font, white, state_3, self.mouse_pointer)
 		_paint_blue = button.Paint_Button(self.display, left_menu_x, left_menu_y+(default_height*4), default_height, self.font, blue, state_3, self.mouse_pointer)
-		'yellow'
-		'purple'
-		'violet'
+		_paint_yellow = button.Paint_Button(self.display, left_menu_x, left_menu_y+(default_height*5), default_height, self.font, yellow, state_3, self.mouse_pointer)
+		_paint_purple = button.Paint_Button(self.display, left_menu_x, left_menu_y+(default_height*6), default_height, self.font, purple, state_3, self.mouse_pointer)
+		_paint_violet = button.Paint_Button(self.display, left_menu_x, left_menu_y+(default_height*7), default_height, self.font, violet, state_3, self.mouse_pointer)
 
-		_
+		_save_map_array = button.Button(self.display, "Save Map", left_menu_x, left_menu_y + (default_height * 8), default_height, 200, self.font, grey, state_3, self.save_map_array)
 	
 
 		"don't touch these, just add relevent instances. Leave empty brackets if list not needed"
@@ -119,7 +123,7 @@ class App:
 		self.button_list = [_new_button, _load_button, 
 		_text_description, _description, _text_mapsize, _mapsize, _text_playerone, _playerone, _text_playertwo, _playertwo, _text_playerthree, _playerthree, _text_playerfour, _playerfour, _save_button, 
 		_file_location_box, _load_map_button, _print_map_button, 
-		_paint_red, _paint_green, _paint_grey, _paint_white, _paint_blue]
+		_paint_orange, _paint_green, _paint_grey, _paint_white, _paint_blue, _paint_yellow, _paint_purple, _paint_violet, _save_map_array]
 		##########################################################################################		
 
 		self.handler.set_lists(self.obj_list, self.button_list, self.tile_arr)
@@ -171,4 +175,7 @@ class App:
 			print(self.current_map)
 		except:
 			print('no map loaded')
-				
+
+
+	def save_map_array(self):
+		print("it worked")

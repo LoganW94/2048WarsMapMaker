@@ -9,7 +9,7 @@ class New_Map:
 		mapsize = int(mapsize)
 
 		default_x = 200
-		default_y = 150
+		default_y = 50
 		init_x = default_x
 		default_size = 25
 
