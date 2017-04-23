@@ -46,6 +46,7 @@ class GameMap:
 		if terrtype not in valid_types:
 			raise RuntimeError("Invalid Terrain type passed: " + terrtype)
 		if(not self._in_bounds(x,y)):
+			
 			raise RuntimeError("Cannot place terrain out of bounds")
 		self._grid[x][y] = Terrain(terrtype)
 

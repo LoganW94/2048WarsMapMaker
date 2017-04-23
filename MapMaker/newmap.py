@@ -1,4 +1,18 @@
 import button
+from gamemap import GameMap
+from griditem import *
+import sys
+
+white = (255,255,255)
+black = (0,0,0)
+red = (255,0,0)
+green = (0,255,0)
+blue = (0,0,255)
+grey = (211,211,211)
+yellow = (255,255,0)
+violet = (160,10,226)
+purple = (160,32,240)
+orange = (255,165,0)
 
 class New_Map:
 
@@ -6,7 +20,14 @@ class New_Map:
 
 	def __init__(self, display, pointer, font, description, mapsize, playerone, playertwo, playerthree, playerfour):
 
-		mapsize = int(mapsize)
+		self.mapsize = int(mapsize)
+		self.description = description
+		self.playerone = playerone
+		self.playertwo = playertwo
+		self.playerthree = playerthree
+		self.playerfour = playerfour
+
+		self.player_names = [self.playerone,self.playertwo,self.playerthree,self.playerfour]
 
 		default_x = 200
 		default_y = 50
@@ -15,8 +36,8 @@ class New_Map:
 
 		row = []
 		self.grid = []
-		for x in range(mapsize):
-			for y in range(mapsize):
+		for x in range(self.mapsize):
+			for y in range(self.mapsize):
 				tile = button.Tile(display, default_x, default_y, default_size, font, (255,255,255), 3, pointer)
 				row.append(tile)
 				default_x += default_size
@@ -24,8 +45,48 @@ class New_Map:
 			self.grid.append(row)	
 			default_y += default_size
 			default_x = init_x
-
-		
-
+	
 	def get_grid(self):
 		return self.grid	
+
+	"put all code needed to format json, using Jack's code here"	
+
+
+	def final_grid(self, grid):
+
+		g = GameMap.new(self.mapsize)
+		g.player_names = self.player_names
+		x = 0
+		y = 0
+
+		self.grid = grid
+
+		for i in self.grid:
+			for r in i:
+				if r.color == blue:
+					print("blue")
+					print(x,y)
+					g.put_terrain(x,y,'W')
+				elif r.color == white:	
+					print("white")
+					print(x,y)
+					g.put_terrain(x,y,'P')
+				elif r.color == green:
+					print("green")
+					print(x,y)
+					g.put_terrain(x,y,'T')
+				elif r.color == orange:
+					print("orange")
+					print(x,y)
+					g.put_city(x,y,0)	
+				x+=1
+			y+=1
+			x=0			
+
+
+		# print ("map as JSON is " + g.to_json())
+		f1=open('testmap_out.json', 'w+')
+		f1.write(g.to_json())
+		f1.close()		
+
+	
