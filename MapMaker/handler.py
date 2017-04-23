@@ -73,8 +73,8 @@ class Handler:
 
 	def get_input(self):
 
-		alphabet = ['a','b','c','d','e','f','g','h','i','j','k','l','m','n','o','p','q','r','s','t','u','v','x','y','z']
-
+		alphabet = ['a','b','c','d','e','f','g','h','i','j','k','l','m','n','o','p','q','r','s','t','u','v','x','y','z','1','2','3','4','5','6','7','8','9','0']
+		
 		for event in pygame.event.get():
 			if event.type == pygame.QUIT:
 				"closes out pygame and python script"
@@ -93,7 +93,10 @@ class Handler:
 					self.word = self.word[:-1]
 				else:
 					key = pygame.key.name(event.key)
-					self.word += key		
+					if key in alphabet:
+						self.word += key
+					else:
+						print(key)			
 
 	def erase(self):
 		self.word = ''	

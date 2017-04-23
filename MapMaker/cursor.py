@@ -8,10 +8,9 @@ grey = (211,211,211)
 
 class Cursor:
 	
-	def __init__(self, screen, x, y):
+	def __init__(self, screen):
 		self.screen = screen
-		self._x = x
-		self._y = y
+		self.set_default()
 		self.counter = 0
 		self.is_clicked = False
 		self.wait = False
@@ -38,6 +37,10 @@ class Cursor:
 			self.counter += 1
 		else:
 			self.counter = 0
+
+	def set_default(self):
+		self._x = -10
+		self._y = -10		
 
 	def set_x(self, x):
 		self._x = x
