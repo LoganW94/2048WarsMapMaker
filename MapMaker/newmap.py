@@ -11,7 +11,6 @@ blue = (0,0,255)
 grey = (211,211,211)
 yellow = (255,255,0)
 violet = (160,10,226)
-purple = (160,32,240)
 orange = (255,165,0)
 
 class New_Map:
@@ -57,7 +56,7 @@ class New_Map:
 	def final_grid(self, grid):
 
 		g = GameMap.new(self.mapsize)
-		g.description = 
+		g.description = self.description
 		g.player_names = self.player_names
 		x = 0
 		y = 0

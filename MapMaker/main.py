@@ -16,6 +16,8 @@ def start():
 
 	while not gameExit:
 
+		app.update()
+
 		handler.update(app.get_current_state())
 		
 		handler.draw()

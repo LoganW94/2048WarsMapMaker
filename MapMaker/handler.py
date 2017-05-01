@@ -23,6 +23,7 @@ class Handler:
 		self._obj_list = obj_list
 		self.button_list = button_list
 		self.tile_arr = tile_arr
+		self.selected_button = None
 
 	def set_screen(self, screen, displayWidth, displayHeight):
 		self.screen = screen
@@ -46,13 +47,16 @@ class Handler:
 
 		for x in self.button_list:
 			x.update(self.mouse_pos, self._z, self.current_state)
-			if x.is_selected == True and x != self.selected_button:
-				self.exclude = self.button_list.index(x)
-				for y in self.button_list:
-					if self.button_list.index(y) != self.exclude:
-						y.is_selected = False			
+			try:
+				if x.is_selected == True and x != self.selected_button:
+					self.exclude = self.button_list.index(x)
+					for y in self.button_list:
+						if self.button_list.index(y) != self.exclude:
+							y.is_selected = False			
 
-				self.selected_button = x	
+					self.selected_button = x
+			except:
+				self.selected_button = None				
 
 		for i in self.tile_arr:
 			for x in i:
