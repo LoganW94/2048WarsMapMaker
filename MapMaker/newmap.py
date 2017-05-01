@@ -80,7 +80,9 @@ class New_Map:
 				elif r.color == violet:
 					g.put_city(x,y,1)
 				elif r.color ==	purple:
-					g.put_city(x,y,2)		
+					g.put_city(x,y,2)
+				elif r.color ==	yellow:
+					g.put_city(x,y,3)			
 				x+=1
 			y+=1
 			x=0		
