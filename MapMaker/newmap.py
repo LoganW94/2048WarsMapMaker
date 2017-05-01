@@ -75,12 +75,16 @@ class New_Map:
 				elif r.color == grey:
 					g.put_terrain(x,y,'R')
 				elif r.color == orange:
+					g.put_terrain(x,y,'P')
 					g.put_city(x,y,0)	
 				elif r.color == violet:
+					g.put_terrain(x,y,'P')
 					g.put_city(x,y,1)
-				elif r.color ==	purple:
+				elif r.color == red:
+					g.put_terrain(x,y,'P')
 					g.put_city(x,y,2)
 				elif r.color ==	yellow:
+					g.put_terrain(x,y,'P')
 					g.put_city(x,y,3)			
 				x+=1
 			y+=1
@@ -89,7 +93,7 @@ class New_Map:
 		x=0
 		y=0
 
-		# print ("map as JSON is " + g.to_json())
+		filename = ("map_file" + ".json")
 		f1=open('testmap_out.json', 'w+')
 		f1.write(g.to_json())
 		f1.close()		
