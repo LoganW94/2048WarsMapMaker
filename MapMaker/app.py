@@ -30,7 +30,7 @@ class App:
 		"variables"  
 		displayWidth = 800
 		displayHeight = 600
-		self.current_state = 1
+		self.current_state = 0
 
 		##########################################################################################
 		"design app here"

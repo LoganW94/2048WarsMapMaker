@@ -42,12 +42,14 @@ class New_Map:
 				row.append(tile)
 				default_x += default_size
 
-			self.grid.append(row)	
+			self.grid.append(row)
+			row = []	
 			default_y += default_size
 			default_x = init_x
 	
 	def get_grid(self):
-		return self.grid	
+		return self.grid
+
 
 	"put all code needed to format json, using Jack's code here"	
 
@@ -55,6 +57,7 @@ class New_Map:
 	def final_grid(self, grid):
 
 		g = GameMap.new(self.mapsize)
+		g.description = 
 		g.player_names = self.player_names
 		x = 0
 		y = 0
@@ -63,26 +66,27 @@ class New_Map:
 
 		for i in self.grid:
 			for r in i:
+				
 				if r.color == blue:
-					print("blue")
-					print(x,y)
 					g.put_terrain(x,y,'W')
 				elif r.color == white:	
-					print("white")
-					print(x,y)
 					g.put_terrain(x,y,'P')
 				elif r.color == green:
-					print("green")
-					print(x,y)
 					g.put_terrain(x,y,'T')
+				elif r.color == grey:
+					g.put_terrain(x,y,'R')
 				elif r.color == orange:
-					print("orange")
-					print(x,y)
 					g.put_city(x,y,0)	
+				elif r.color == violet:
+					g.put_city(x,y,1)
+				elif r.color ==	purple:
+					g.put_city(x,y,2)		
 				x+=1
 			y+=1
-			x=0			
+			x=0		
 
+		x=0
+		y=0
 
 		# print ("map as JSON is " + g.to_json())
 		f1=open('testmap_out.json', 'w+')
