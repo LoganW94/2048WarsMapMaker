@@ -18,6 +18,7 @@ class GameMap:
 		g = GameMap()
 		g._map_size = size
 		g.player_names = ["Katakeets","Humans","Orks","Robots"]
+		g.description = "A Default Map Description."
 		g._inst_grid()
 		return g
 
@@ -100,6 +101,7 @@ class GameMap:
 
 	def to_json(self):
 		mjson = {}
+		mjson["description"] = self.description
 		mjson["players"] = self.player_names
 		mjson["turn_index"] = self._turn_index
 		mjson["map_size"] = self._map_size
