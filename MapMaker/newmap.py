@@ -49,11 +49,8 @@ class New_Map:
 	def get_grid(self):
 		return self.grid
 
-
-	"put all code needed to format json, using Jack's code here"	
-
-
-	def final_grid(self, grid):
+	def final_grid(self, grid, file_name):
+		self.file_name = file_name
 
 		g = GameMap.new(self.mapsize)
 		g.description = self.description
@@ -85,7 +82,9 @@ class New_Map:
 					g.put_city(x,y,2)
 				elif r.color ==	yellow:
 					g.put_terrain(x,y,'P')
-					g.put_city(x,y,3)			
+					g.put_city(x,y,3)
+				else:
+					g.put_terrain(x,y,'P')				
 				x+=1
 			y+=1
 			x=0		
@@ -93,8 +92,8 @@ class New_Map:
 		x=0
 		y=0
 
-		filename = ("map_file" + ".json")
-		f1=open('testmap_out.json', 'w+')
+		self.file_name = (self.file_name + ".json")
+		f1=open(self.file_name, 'w+')
 		f1.write(g.to_json())
 		f1.close()		
 
