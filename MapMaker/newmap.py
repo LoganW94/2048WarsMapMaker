@@ -19,6 +19,10 @@ class New_Map:
 
 	def __init__(self, display, pointer, font, description, mapsize, playerone, playertwo, playerthree, playerfour):
 
+		self.display = display
+		self.pointer = pointer
+		self.font = font
+
 		self.mapsize = int(mapsize)
 		self.description = description
 		self.playerone = playerone
@@ -28,6 +32,16 @@ class New_Map:
 
 		self.player_names = [self.playerone,self.playertwo,self.playerthree,self.playerfour]
 
+		self.g = GameMap.new(self.mapsize)
+		self.g.description = self.description
+		self.g.player_names = self.player_names
+
+		
+	
+	def get_grid(self):
+		return self.grid
+
+	def new_map(self):
 		default_x = 200
 		default_y = 50
 		init_x = default_x
@@ -37,24 +51,56 @@ class New_Map:
 		self.grid = []
 		for x in range(self.mapsize):
 			for y in range(self.mapsize):
-				tile = button.Tile(display, default_x, default_y, default_size, font, (255,255,255), 3, pointer)
+				tile = button.Tile(self.display, default_x, default_y, default_size, self.font, white, 3, self.pointer)
 				row.append(tile)
 				default_x += default_size
 
 			self.grid.append(row)
 			row = []	
 			default_y += default_size
+			default_x = init_x	
+
+	def loaded_map(self):
+		
+		x = 0
+		y = 0
+		default_x = 200
+		default_y = 50
+		init_x = default_x
+		default_size = 25
+		
+		row = []
+		self.grid = []
+		for i in range(self.mapsize):
+			for r in range(self.mapsize):
+				grid_item = self.g.get_grid_item(x,y)
+				if(isinstance(grid_item,Terrain)):
+					t_type = grid_item.terrtype
+					if t_type == "W":
+						color = blue
+					if t_type == "P":
+						color = white
+					if t_type == "R":
+						color = grey
+					if t_type == "T":
+						color = green
+					else:
+						color = red			
+				tile = button.Tile(self.display, default_x, default_y, default_size, self.font, color, 3, self.pointer)
+				row.append(tile)
+				default_x += default_size
+				x+=1
+
+			self.grid.append(row)
+			row = []	
+			default_y += default_size
 			default_x = init_x
-	
-	def get_grid(self):
-		return self.grid
+			y+=1
+			x=0	
 
 	def final_grid(self, grid, file_name):
 		self.file_name = file_name
 
-		g = GameMap.new(self.mapsize)
-		g.description = self.description
-		g.player_names = self.player_names
 		x = 0
 		y = 0
 
@@ -64,27 +110,27 @@ class New_Map:
 			for r in i:
 				
 				if r.color == blue:
-					g.put_terrain(x,y,'W')
+					self.g.put_terrain(x,y,'W')
 				elif r.color == white:	
-					g.put_terrain(x,y,'P')
+					self.g.put_terrain(x,y,'P')
 				elif r.color == green:
-					g.put_terrain(x,y,'T')
+					self.g.put_terrain(x,y,'T')
 				elif r.color == grey:
-					g.put_terrain(x,y,'R')
+					self.g.put_terrain(x,y,'R')
 				elif r.color == orange:
-					g.put_terrain(x,y,'P')
-					g.put_city(x,y,0)	
+					self.g.put_terrain(x,y,'P')
+					self.g.put_city(x,y,0)	
 				elif r.color == violet:
-					g.put_terrain(x,y,'P')
-					g.put_city(x,y,1)
+					self.g.put_terrain(x,y,'P')
+					self.g.put_city(x,y,1)
 				elif r.color == red:
-					g.put_terrain(x,y,'P')
-					g.put_city(x,y,2)
+					self.g.put_terrain(x,y,'P')
+					self.g.put_city(x,y,2)
 				elif r.color ==	yellow:
-					g.put_terrain(x,y,'P')
-					g.put_city(x,y,3)
+					self.g.put_terrain(x,y,'P')
+					self.g.put_city(x,y,3)
 				else:
-					g.put_terrain(x,y,'P')				
+					self.g.put_terrain(x,y,'P')				
 				x+=1
 			y+=1
 			x=0		

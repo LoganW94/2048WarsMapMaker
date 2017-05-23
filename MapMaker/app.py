@@ -8,6 +8,7 @@ import newmap
 
 "app specific imports"
 import loadmap
+import json
 
 "colors"
 white = (255,255,255)
@@ -192,6 +193,7 @@ class App:
 		self.playerfour = (self.button_list[11])._txt.title()
 
 		self.map = newmap.New_Map(self.display, self.mouse_pointer, self.font, self.description, self.mapsize, self.playerone, self.playertwo, self.playerthree, self.playerfour)
+		self.map.new_map()
 		self.mapmaker_state()
 		self.tile_arr = self.map.get_grid()
 		self.handler.set_lists(self.obj_list, self.button_list, self.tile_arr)
@@ -203,11 +205,30 @@ class App:
 		url = i._txt
 		url = url + ".json"
 		try:
-			with open(url, "r") as f:
-				self.json_in=f.read().replace('\n', '')	
+			self.open_file(url)
 		except:
 			print('no file found @ %s' % url)
 
+		json_grid = self.json_in["grid"]
+		self.description = self.json_in["description"]
+		self.mapsize = self.json_in["map_size"]
+		players = self.json_in["players"]
+		self.playerone =  players[0]
+		self.playertwo =  players[1]
+		self.playerthree =  players[2]
+		self.playerfour =  players[3]
+
+		self.map = newmap.New_Map(self.display, self.mouse_pointer, self.font, self.description, self.mapsize, self.playerone, self.playertwo, self.playerthree, self.playerfour)
+		self.map.loaded_map()
+		self.mapmaker_state()
+		self.tile_arr = self.map.get_grid()
+		self.handler.set_lists(self.obj_list, self.button_list, self.tile_arr)
+
+
+	def open_file(self,url):		
+		with open(url, "r") as f:
+				self.json_in=f.read().replace('\n', '')	
+				self.json_in = json.loads(self.json_in)
 
 	def print_map(self):
 		try:
