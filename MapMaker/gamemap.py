@@ -32,6 +32,7 @@ class GameMap:
 		g._map_size = mjson["map_size"]
 		g._inst_grid()
 		i = 0;
+		print(mjson["grid"])
 		for j in mjson["grid"]:
 			g._grid[i / g._map_size][i % g._map_size] = GameMap._grid_item_convert(j);
 			i+=1

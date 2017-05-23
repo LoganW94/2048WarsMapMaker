@@ -17,11 +17,16 @@ class New_Map:
 
 	grid = []
 
-	def __init__(self, display, pointer, font, description, mapsize, playerone, playertwo, playerthree, playerfour):
+	def __init__(self, display, pointer, font):
 
 		self.display = display
 		self.pointer = pointer
 		self.font = font
+	
+	def get_grid(self):
+		return self.grid
+
+	def new_map(self, description, mapsize, playerone, playertwo, playerthree, playerfour):
 
 		self.mapsize = int(mapsize)
 		self.description = description
@@ -36,12 +41,6 @@ class New_Map:
 		self.g.description = self.description
 		self.g.player_names = self.player_names
 
-		
-	
-	def get_grid(self):
-		return self.grid
-
-	def new_map(self):
 		default_x = 200
 		default_y = 50
 		init_x = default_x
@@ -60,8 +59,10 @@ class New_Map:
 			default_y += default_size
 			default_x = init_x	
 
-	def loaded_map(self):
-		
+	def loaded_map(self, json_in):
+
+		self.g = GameMap.load(json_in)
+
 		x = 0
 		y = 0
 		default_x = 200
@@ -71,9 +72,10 @@ class New_Map:
 		
 		row = []
 		self.grid = []
-		for i in range(self.mapsize):
-			for r in range(self.mapsize):
-				grid_item = self.g.get_grid_item(x,y)
+
+		for x in range(g.get_map_size()):
+			for y in range(g.get_map_size()):
+				grid_item = g.get_grid_item(x,y)
 				if(isinstance(grid_item,Terrain)):
 					t_type = grid_item.terrtype
 					if t_type == "W":
@@ -85,18 +87,15 @@ class New_Map:
 					if t_type == "T":
 						color = green
 					else:
-						color = red			
-				tile = button.Tile(self.display, default_x, default_y, default_size, self.font, color, 3, self.pointer)
-				row.append(tile)
-				default_x += default_size
-				x+=1
+						color = red	
+					tile = button.Tile(self.display, default_x, default_y, default_size, self.font, color, 3, self.pointer)
+					row.append(tile)
+					default_x += default_size	
+				self.grid.append(row)
+				row = []	
+				default_y += default_size
+				default_x = init_x		
 
-			self.grid.append(row)
-			row = []	
-			default_y += default_size
-			default_x = init_x
-			y+=1
-			x=0	
 
 	def final_grid(self, grid, file_name):
 		self.file_name = file_name
@@ -140,7 +139,7 @@ class New_Map:
 
 		self.file_name = (self.file_name + ".json")
 		f1=open(self.file_name, 'w+')
-		f1.write(g.to_json())
+		f1.write(self.g.to_json())
 		f1.close()		
 
 	
