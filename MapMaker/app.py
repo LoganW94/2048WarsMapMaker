@@ -206,7 +206,6 @@ class App:
 		url = url + ".json"
 		try:
 			self.open_file(url)
-			#self.print_map()
 		except:
 			print('no file found @ %s' % url)
 
