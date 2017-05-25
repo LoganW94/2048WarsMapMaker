@@ -20,23 +20,24 @@ class Cursor:
 	def update(self, mouse_pos, z, selected_button):
 		self.mouse_pos = mouse_pos
 		self.selected_button = selected_button
-		#self.blink()				
+		self.blink()				
 
 	def blink(self):
 
-		if self.wait == True:
-			self.timer +=1
-			if self.timer == 10:
-				self.timer = 0
-				self.wait = False	
-		if self.counter <= 5:
+		if self.wait == False:
 			self.visible = False
-			self.counter +=1
-		elif self.counter <= 10:
-			self.visible == True
-			self.counter += 1
+			self.timer += 1
+		elif self.wait == True:
+			self.visible = True
+			self.timer += 1		
 		else:
-			self.counter = 0
+			self.visible = True
+
+		if self.timer == 10:
+			self.wait = True
+		elif self.timer == 20:
+			self.wait = False
+			self.timer = 0		
 
 	def set_default(self):
 		self._x = -10

@@ -16,13 +16,14 @@ class Button:
 		self.active_state = active_state
 		self.method = method
 
+		self.selected_color = self.get_selected_color(self.color)
+		self.button_clicked_color = self.get_selected_color(self.selected_color)
 		self.color_init = self.color
 		self.colide = False
 		self.pressed = False
 		self.is_selected = False
 		self.outline_color = (0,0,0)
-		self.outline_init = self.outline_color
-		self.clicked_outline_color = (0,50,0)			
+					
 
 	def update(self, mouse_pos, z, current_state):
 		self.mouse_pos = mouse_pos
@@ -52,61 +53,32 @@ class Button:
 			self.pressed = True
 			self.is_selected = True
 		elif z == 0 and self.pressed == True:
-			self.pressed = False				
+			self.pressed = False
+
+	def get_selected_color(self, color):
+		val = 30
+		r = color[0]
+		g = color[1] 
+		b = color[2]
+		color_init = (r,g,b)
+
+		if r <val or g < val or b < val:
+			new_color = color_init
+		else:
+			r-=val
+			g-=val
+			b-=val
+			new_color = (r,g,b)	
+		return new_color						
 	
 	def change_color(self, z):
 
-		r = self.color[0]
-		g = self.color[1] 
-		b = self.color[2]
-		r2 = self.outline_color[0]
-		g2 = self.outline_color[1]
-		b2 = self.outline_color[2]
-		
 		if self.colide == True and z == 1:
-			r2-20
-			g2-20
-			b2-20
-			self.clicked_color = (r2,g2,b2)
-			self.color = self.clicked_color
+			self.color = self.button_clicked_color
 		elif self.colide == True:
-
-			if r <=20 or r2 <= 20:
-				g-20
-				b-20 
-				g2-20
-				b2-20
-				self.new_color = (r,g,b)
-				self.clicked_color = (r2,g2,b2)
-			elif g <= 20 or g2 <= 20:
-				r-20
-				b-20
-				r2-20
-				b2-20
-				self.new_color = (r,g,b)
-				self.clicked_color = (r2,g2,b2)
-			elif b <= 20 or b2 <= 20:
-				r-20
-				g-20
-				r2-20
-				g2-20
-				self.new_color = (r,g,b)
-				self.clicked_color = (r2,g2,b2)
-			else:
-				r-20
-				g-20
-				b-20
-				r2-20
-				g2-20
-				b2-20
-				self.new_color = (r,g,b)
-				self.clicked_color = (r2,g2,b2)	
-
-			self.color = self.new_color
-			self.outline_color = self.new_color
+			self.color = self.selected_color
 		else:
-			self.color = self.color_init
-			self.outline_color = self.outline_init	
+			self.color = self.color_init	
 
 	def draw(self, current_state):
 		current_state = current_state
@@ -149,6 +121,7 @@ class Text_Box(Button):
 
 		if self.is_selected == True:
 			self._txt = self.handler.get_text_input()
+			self.move_cursor()
 
 	def when_pressed(self, z):
 		if self.colide == True and z == 1 and self.pressed == False:
@@ -161,7 +134,11 @@ class Text_Box(Button):
 			self.pressed = False
 
 	def get_text(self):
-		return self._txt		
+		return self._txt
+
+	def move_cursor(self):
+		txt_width = self._font.size(self._txt) 
+		self.cursor.set_x(self._x+2+ (txt_width[0]+2))
 
 
 class Paint_Button(Button):
@@ -182,8 +159,6 @@ class Paint_Button(Button):
 			self.check_collide()
 
 			self.when_pressed(z)
-
-			self.change_color(z)
 
 	def when_pressed(self, z):
 		if self.colide == True and z == 1 and self.pressed == False:
@@ -224,36 +199,10 @@ class Tile(Button):
 		elif z == 0 and self.pressed == True:
 			self.pressed = False	
 
-	def change_color(self, z):	
+	def change_color(self, z):
 
 		if self.colide == True and z == 1:
-			self.color = self.pointer.color
-		elif self.colide == True:
-			r2 = self.outline_color[0]
-			g2 = self.outline_color[1]
-			b2 = self.outline_color[2]
-
-			if r2 <= 20:
-				g2-20
-				b2-20
-				self.clicked_color = (r2,g2,b2)
-			elif g2 <= 20:
-				r2-20
-				b2-20
-				self.clicked_color = (r2,g2,b2)
-			elif b2 <= 20:
-				r2-20
-				g2-20
-				self.clicked_color = (r2,g2,b2)
-			else:
-				r2-20
-				g2-20
-				b2-20
-				self.clicked_color = (r2,g2,b2)	
-
-			self.outline_color = self.clicked_color
-		else:
-			self.outline_color = self.outline_init	
+			self.color = self.pointer.color	
 
 class Display_Box(Button):
 
