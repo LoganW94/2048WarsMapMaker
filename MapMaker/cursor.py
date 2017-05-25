@@ -52,4 +52,4 @@ class Cursor:
 	def draw(self, mouse_pos):
 		
 		if self.visible == True:
-			self.screen.fill(black, rect = ((self._x, self._y), (2, 15)))
+			self.screen.fill(black, rect = ((self._x, self._y), (1, 17)))
