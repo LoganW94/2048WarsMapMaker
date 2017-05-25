@@ -2,6 +2,17 @@
 def default():
 	print("default")
 
+"colors"
+white = (255,255,255)
+black = (0,0,0)
+red = (255,0,0)
+green = (0,255,0)
+blue = (0,0,255)
+grey = (211,211,211)
+yellow = (255,255,0)
+violet = (160,10,226)
+orange = (255,165,0)	
+
 class Button:
 
 	def __init__(self, screen, txt, x, y, height, width, font, color, active_state, method = default):
@@ -160,6 +171,15 @@ class Paint_Button(Button):
 
 			self.when_pressed(z)
 
+			self.change_color()
+
+	def change_color(self):
+
+		if self.is_selected == True:
+			self.outline_color = grey
+		else:
+			self.outline_color = black				
+
 	def when_pressed(self, z):
 		if self.colide == True and z == 1 and self.pressed == False:
 			self.pressed = True	
@@ -167,6 +187,7 @@ class Paint_Button(Button):
 			self.pointer.change_color(self.color)
 		elif z == 0 and self.pressed == True:
 			self.pressed = False
+
 
 
 class Tile(Button):
@@ -200,7 +221,6 @@ class Tile(Button):
 			self.pressed = False	
 
 	def change_color(self, z):
-
 		if self.colide == True and z == 1:
 			self.color = self.pointer.color	
 
@@ -216,5 +236,3 @@ class Display_Box(Button):
 	def update(self, mouse_pos, z, current_state):
 		self.mouse_pos = mouse_pos
 		current_state = current_state
-
-			
