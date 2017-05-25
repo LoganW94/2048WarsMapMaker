@@ -22,7 +22,7 @@ class New_Map:
 		self.display = display
 		self.pointer = pointer
 		self.font = font
-	
+
 	def get_grid(self):
 		return self.grid
 
@@ -73,9 +73,9 @@ class New_Map:
 		row = []
 		self.grid = []
 
-		for x in range(g.get_map_size()):
-			for y in range(g.get_map_size()):
-				grid_item = g.get_grid_item(x,y)
+		for x in range(self.g.get_map_size()):
+			for y in range(self.g.get_map_size()):
+				grid_item = self.g.get_grid_item(x,y)
 				if(isinstance(grid_item,Terrain)):
 					t_type = grid_item.terrtype
 					if t_type == "W":
