@@ -15,9 +15,8 @@ class Pointer:
 
 	def draw(self, mouse_pos):
 		# Mouse pointer
-		self.screen.fill((0,0,0), rect = ((self.mouse_pos[0], self.mouse_pos[1]-5), (4, 12)))
-		self.screen.fill((0,0,0), rect = ((self.mouse_pos[0]-5, self.mouse_pos[1]), (12, 4)))
-		self.screen.fill(self.color, rect = ((self.mouse_pos[0], self.mouse_pos[1]-5), (2, 11)))
-		self.screen.fill(self.color, rect = ((self.mouse_pos[0]-5, self.mouse_pos[1]), (11, 2)))
+		self.screen.fill((0,0,0), rect = ((self.mouse_pos[0], self.mouse_pos[1]), (8, 8)))
+		self.screen.fill(self.color, rect = ((self.mouse_pos[0], self.mouse_pos[1]), (4, 4)))
+		
 		
 
