@@ -60,7 +60,7 @@ class App:
 
 		"Start menu state"
 		self.inti_state()
-
+		self.handler.set_screen(self.display, self.displayWidth, self.displayHeight)
 		self.set_lists_handler()
 		##########################################################################################
 
@@ -232,5 +232,4 @@ class App:
 	def set_lists_handler(self):
 		self.obj_list = [self.mouse_pointer, self.mouse_cursor]
 		self.handler.set_lists(self.obj_list, self.button_list, self.tile_arr)
-		self.handler.set_screen(self.display, self.displayWidth, self.displayHeight)	
-		
+			
