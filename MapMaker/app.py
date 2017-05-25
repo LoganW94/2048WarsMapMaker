@@ -7,7 +7,6 @@ import cursor
 import newmap
 
 "app specific imports"
-import loadmap
 import json
 
 "colors"
