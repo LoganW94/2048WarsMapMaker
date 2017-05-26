@@ -76,15 +76,17 @@ class New_Map:
 		for x in range(self.g.get_map_size()):
 			for y in range(self.g.get_map_size()):
 				grid_item = self.g.get_grid_item(x,y)
+
 				if(isinstance(grid_item,Terrain)):
 					t_type = grid_item.terrtype
-					if t_type == "W":
+					#print(t_type)
+					if t_type == 'W':
 						color = blue
-					if t_type == "P":
+					if t_type == 'P':
 						color = white
-					if t_type == "R":
+					if t_type == 'R':
 						color = grey
-					if t_type == "T":
+					if t_type == 'T':
 						color = green
 					else:
 						color = red	
@@ -93,8 +95,8 @@ class New_Map:
 					default_x += default_size	
 				self.grid.append(row)
 				row = []	
-				default_y += default_size
-				default_x = init_x		
+			default_y += default_size
+			default_x = init_x			
 
 
 	def final_grid(self, grid, file_name):
