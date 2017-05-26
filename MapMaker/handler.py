@@ -27,8 +27,8 @@ class Handler:
 
 	def set_screen(self, screen, displayWidth, displayHeight):
 		self.screen = screen
-		self.cursor_x = displayWidth/2
-		self.cursor_y = displayHeight/2
+		self.cursor_x = 10
+		self.cursor_y = 10
 
 		self.set_mouse_pos()
 
