@@ -5,7 +5,6 @@ import button
 import pointer
 import cursor
 import newmap
-import filexplorer
 
 "app specific imports"
 import json
@@ -52,7 +51,7 @@ class App:
 		self.font = pygame.font.SysFont(None, 25)
 
 		"define display"
-		self.display = Screen.new(self.displayWidth, self.displayHeight, white)
+		self.display = Screen.new(self.displayWidth, self.displayHeight, white, 'MapMaker Alpha', 'assets/icon2.png')
 
 		"init objects"
 		self.mouse_cursor = cursor.Cursor(self.display)
@@ -123,15 +122,13 @@ class App:
 		self.mouse_cursor.set_default()
 		state = 2
 
-		xplorer = filexplorer.FileXplorer()
-
 		file_location_box = button.Text_Box(self.display, self.left_menu_x, self.left_menu_y, self.default_height, 200, self.font, state, self.mouse_cursor, self.handler)
 
 		load_map_button = button.Button(self.display, "Load map", self.left_menu_x, self.left_menu_y + 30, self.default_height, 100, self.font, grey, state, self.load_map)
 
 		main_menu_button = button.Button(self.display, "Main Menu", self.left_menu_x, self.left_menu_y + 300, self.default_height, 150, self.font, grey, state, self.inti_state)
 
-		xplorer_launch = button.Button(self.display, "Launch file explorer", self.left_menu_x, self.left_menu_y - 30, self.default_height, 200, self.font, grey, state, xplorer.run)
+		xplorer_launch = button.Button(self.display, "Launch file explorer", self.left_menu_x, self.left_menu_y - 30, self.default_height, 200, self.font, grey, state)
 
 		state_list =[file_location_box, load_map_button, main_menu_button, xplorer_launch]
 
