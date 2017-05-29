@@ -79,14 +79,13 @@ class New_Map:
 
 				if(isinstance(grid_item,Terrain)):
 					t_type = grid_item.terrtype
-					#print(t_type)
-					if t_type == 'W':
+					if t_type == 'W' or t_type == 'w':
 						color = blue
-					if t_type == 'P':
+					if t_type == 'P' or t_type == 'p':
 						color = white
-					if t_type == 'R':
+					if t_type == 'R' or t_type == 'r':
 						color = grey
-					if t_type == 'T':
+					if t_type == 'T' or t_type == 't':
 						color = green
 					else:
 						color = red	
