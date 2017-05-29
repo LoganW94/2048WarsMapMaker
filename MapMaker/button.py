@@ -151,7 +151,6 @@ class Text_Box(Button):
 		txt_width = self._font.size(self._txt) 
 		self.cursor.set_x(self._x+2+ (txt_width[0]+2))
 
-
 class Paint_Button(Button):
 
 	def __init__(self, screen, x, y, size, font, color, active_state, pointer):
@@ -187,8 +186,6 @@ class Paint_Button(Button):
 			self.pointer.change_color(self.color)
 		elif z == 0 and self.pressed == True:
 			self.pressed = False
-
-
 
 class Tile(Button):
 
