@@ -77,15 +77,17 @@ class New_Map:
 			for y in range(self.g.get_map_size()):
 				grid_item = self.g.get_grid_item(x,y)
 
+
 				if(isinstance(grid_item,Terrain)):
 					t_type = grid_item.terrtype
-					if t_type == 'W' or t_type == 'w':
+					print(t_type)
+					if t_type == 'W':
 						color = blue
-					if t_type == 'P' or t_type == 'p':
+					elif t_type == 'P':
 						color = white
-					if t_type == 'R' or t_type == 'r':
+					elif t_type == 'R':
 						color = grey
-					if t_type == 'T' or t_type == 't':
+					elif t_type == 'T':
 						color = green
 					else:
 						color = red	
