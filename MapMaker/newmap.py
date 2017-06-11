@@ -2,6 +2,7 @@ import button
 from gamemap import GameMap
 from griditem import *
 import sys
+import os
 
 white = (255,255,255)
 black = (0,0,0)
